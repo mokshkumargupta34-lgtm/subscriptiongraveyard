@@ -1,0 +1,6 @@
+# raw source video — 44MB with audio, not scrub-friendly; derivatives live in media/
+0704.mp4
+
+# dashboard build deps
+dashboard/node_modules/
+dashboard/tsconfig.tsbuildinfo

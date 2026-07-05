@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night-0: #07071c;
+  --color-night-1: #111133;
+  --color-night-2: #1c1a4a;
+  --color-violet: #7a6cf0;
+  --color-fog: #4a3d8f;
+  --color-stone: #8d86c9;
+  --color-stone-dark: #2a2452;
+  --color-moon: #e9e7ff;
+  --color-teal: #8fe8ff;
+  --color-money: #bfe9cd;
+  --color-gold: #f0c96e;
+  --color-ink: #cfd0ef;
+  --color-ink-2: #9d9cd0;
+  --color-muted: #8f8cc9;
+
+  --font-display: "Cinzel", "Times New Roman", serif;
+  --font-body: "Spectral", Georgia, serif;
+}
+
+@property --spin {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+body {
+  background: var(--color-night-0);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* border beam — orbiting light arc masked to a 1.5px border ring */
+.border-beam::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--spin), transparent 0 300deg, #8fe8ff 336deg, #7a6cf0 354deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: beam-spin 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes beam-spin { to { --spin: 360deg; } }
+
+/* radar sweep */
+.radar-sweep {
+  background: conic-gradient(from 0deg, rgba(143, 232, 255, 0.4), rgba(143, 232, 255, 0.05) 55deg, transparent 70deg);
+  animation: radar-rotate 4s linear infinite;
+}
+@keyframes radar-rotate { to { transform: rotate(360deg); } }
+
+.radar-blip {
+  animation: blip-pulse 4s ease-out infinite;
+}
+@keyframes blip-pulse { 0% { opacity: 1; } 55% { opacity: 0.25; } 100% { opacity: 0.25; } }
+
+/* pointer-follow glow ring on cards */
+.glow-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(140px circle at var(--mx, 50%) var(--my, 0%), rgba(122, 108, 240, 0.9), transparent 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.glow-ring:hover::before { opacity: 1; }
+
+/* gold glint */
+.glint {
+  animation: glint-pop 2.8s ease-in-out infinite;
+}
+@keyframes glint-pop {
+  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+  50% { opacity: 0.95; transform: scale(1) rotate(40deg); }
+}
+
+/* renewal urgency pulse */
+.pulse-gold {
+  animation: pulse-gold 1.8s ease-in-out infinite;
+}
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(240, 201, 110, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(240, 201, 110, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-beam::before { animation: none; display: none; }
+  .radar-sweep, .radar-blip, .glint, .pulse-gold { animation: none; }
+  .radar-blip { opacity: 0.85; }
+}

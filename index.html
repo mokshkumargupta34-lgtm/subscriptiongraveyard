@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subscription Graveyard — every forgotten subscription, still billing you from beyond</title>
+  <meta name="description" content="Connect Gmail read-only, exhume every recurring subscription hiding in your inbox, see lifetime spend, and bury them with one-click cancellation guides." />
+  <meta name="theme-color" content="#07071c" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%26%23129702;%3C/text%3E%3C/svg%3E" />
+  <link rel="preload" as="image" href="media/poster.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ SCROLL-SCRUB VIDEO HERO ============ -->
+  <div class="rig" id="rig">
+    <div class="stage" id="stage">
+      <img class="stage__poster" src="media/poster.jpg" alt="" aria-hidden="true" />
+      <video class="stage__video" id="scrub-video" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+      <div class="stage__scrim" aria-hidden="true"></div>
+
+      <header class="ov hero" id="ov-hero">
+        <div class="hero__spotlight" aria-hidden="true"></div>
+        <canvas class="hero__embers" id="hero-embers" aria-hidden="true"></canvas>
+        <p class="hero__eyebrow">REST IN PEACE, FREE TRIALS</p>
+        <h1 class="hero__title">Subscription Graveyard</h1>
+        <p class="hero__sub"><span id="typewriter" data-text="Every forgotten subscription is out here, still billing you from beyond."></span><span class="hero__cursor" id="type-cursor" aria-hidden="true"></span></p>
+      </header>
+      <p class="ov scroll-hint" id="ov-hint" aria-hidden="true"><span class="scroll-hint__bob">SCROLL TO DESCEND&nbsp;&darr;</span></p>
+
+      <div class="ov caption" id="ov-cap1">
+        <p class="caption__label">ACT I &middot; THE DESCENT</p>
+        <p class="caption__text">Something down there is still charging your card.</p>
+      </div>
+      <div class="ov caption" id="ov-cap2">
+        <p class="caption__label">ACT II &middot; THE HAUNTING</p>
+        <p class="caption__text">Meet the ghost of your money.</p>
+      </div>
+      <div class="ov caption" id="ov-cap3">
+        <p class="caption__label">ACT III &middot; THE RECKONING</p>
+        <p class="caption__text">We tally the damage.</p>
+      </div>
+      <div class="ov caption" id="ov-cap4">
+        <p class="caption__label">ACT IV &middot; THE BURIAL</p>
+        <p class="caption__text">Then you bury them. One click each.</p>
+      </div>
+
+      <nav class="rail" id="rail" aria-label="Journey acts">
+        <button class="rail__dot" type="button" data-target="0.125" aria-label="Act I — The Descent"></button>
+        <button class="rail__dot" type="button" data-target="0.375" aria-label="Act II — The Haunting"></button>
+        <button class="rail__dot" type="button" data-target="0.625" aria-label="Act III — The Reckoning"></button>
+        <button class="rail__dot" type="button" data-target="0.875" aria-label="Act IV — The Burial"></button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ============ CONTENT ============ -->
+  <main class="content">
+
+    <!-- Manifesto: scroll-driven text reveal -->
+    <section class="manifesto" id="manifesto">
+      <div class="manifesto__finale" aria-hidden="true"></div>
+      <p class="manifesto__text" id="manifesto-text"
+         data-text="The average person pays for 12 subscriptions. Remembers 5. This is where the other 7 rest."
+         data-green="the other 7"></p>
+    </section>
+
+    <!-- The Séance: aurora background + 3 steps + radar -->
+    <section class="seance aurora" id="seance">
+      <div class="aurora__band aurora__band--1" aria-hidden="true"></div>
+      <div class="aurora__band aurora__band--2" aria-hidden="true"></div>
+      <div class="section-inner">
+        <p class="kicker">THE S&Eacute;ANCE &middot; HOW IT WORKS</p>
+        <h2 class="section-title">Summon every subscription hiding in your inbox</h2>
+        <p class="lede">Connect Gmail once. The scanner reads only receipt and billing emails, resurrects every recurring charge it finds, and lays them out plot by plot &mdash; including the ones you swore you cancelled in 2021.</p>
+
+        <div class="steps">
+          <article class="step">
+            <p class="step__num">01</p>
+            <h3 class="step__title">Connect the beyond</h3>
+            <p class="step__body">Sign in with Google using read-only <code>gmail.readonly</code> scope. Nothing is sent, moved, or deleted &mdash; the dead are only observed.</p>
+          </article>
+
+          <article class="step step--radar">
+            <p class="step__num">02</p>
+            <h3 class="step__title">Scan for spirits</h3>
+            <p class="step__body">A nightly cron sweep parses receipts from 4,000+ billers, matching amounts, cadence, and renewal dates.</p>
+            <div class="radar" id="radar" aria-hidden="true">
+              <div class="radar__sweep"></div>
+              <span class="radar__blip" style="--bx:44%; --by:26%; --ba:0.3s"><i></i><em>streamflix $12.99</em></span>
+              <span class="radar__blip" style="--bx:30%; --by:44%; --ba:1.6s"><i></i><em>gymrat+ $29</em></span>
+              <span class="radar__blip" style="--bx:56%; --by:66%; --ba:2.4s"><i></i><em>cloudvault $9.99</em></span>
+              <span class="radar__blip" style="--bx:24%; --by:74%; --ba:3.3s"><i></i><em>trial &times;9</em></span>
+            </div>
+          </article>
+
+          <article class="step">
+            <p class="step__num">03</p>
+            <h3 class="step__title">Bury the leeches</h3>
+            <p class="step__body">Every subscription gets a headstone, its lifetime damage, and a one-click cancellation guide.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features: bento grid -->
+    <section class="features" id="features">
+      <div class="section-inner">
+        <p class="kicker">THE INSTRUMENTS &middot; WHAT IT DOES</p>
+        <h2 class="section-title">Grave-digging tools, included</h2>
+        <div class="bento">
+          <article class="bento__cell bento__cell--big">
+            <h3 class="bento__title">Gmail receipt scanning</h3>
+            <p class="bento__body">Read-only, nothing leaves your inbox. The scanner walks your receipts, invoices, and renewal notices &mdash; then builds the graveyard from what it finds.</p>
+            <div class="bento__receipts" aria-hidden="true">
+              <span>RE: Your StreamFlix receipt &middot; $12.99</span>
+              <span>Your GymRat+ membership renewed</span>
+              <span>CloudVault invoice #88231</span>
+              <span>Your trial is converting soon&hellip;</span>
+            </div>
+          </article>
+          <article class="bento__cell">
+            <h3 class="bento__title">Lifetime spend per subscription</h3>
+            <p class="bento__figure">$1,247</p>
+            <p class="bento__body">Every dollar since the day you subscribed.</p>
+          </article>
+          <article class="bento__cell">
+            <h3 class="bento__title">Renewal calendar</h3>
+            <p class="bento__body">Know before you're charged &mdash; every renewal on one haunted calendar.</p>
+          </article>
+          <article class="bento__cell bento__cell--gold">
+            <h3 class="bento__title">One-click cancellation guides</h3>
+            <p class="bento__body">Step-by-step burials for 4,000+ billers, gold-plated and painless.</p>
+          </article>
+          <article class="bento__cell">
+            <h3 class="bento__title">Nightly cron re-scan</h3>
+            <p class="bento__body">New spirits are found while you sleep.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Plots: flip-words heading + glowing tombstones -->
+    <section class="plots" id="plots">
+      <div class="section-inner">
+        <p class="kicker">THE PLOTS &middot; YOUR FINDINGS</p>
+        <h2 class="section-title">You're still paying for <span class="flip" id="flip-words" aria-live="off"><span class="flip__word is-in">StreamFlix.</span></span></h2>
+
+        <div class="graves" role="list">
+          <article class="grave glow-card" role="listitem" tabindex="0">
+            <svg class="grave__ghost" viewBox="0 0 64 80" aria-hidden="true" focusable="false">
+              <path d="M32 4C18 4 8 16 8 32v40c0 3 4 5 6 3l5-5 5 5c2 2 6 2 8 0l5-5 5 5c2 2 6 0 6-3V32C56 16 46 4 32 4z" fill="#e9e7ff" opacity="0.9"/>
+              <circle cx="24" cy="30" r="4" fill="#111133"/><circle cx="40" cy="30" r="4" fill="#111133"/>
+              <ellipse cx="32" cy="44" rx="5" ry="7" fill="#111133" opacity="0.7"/>
+            </svg>
+            <div class="grave__stone">
+              <p class="grave__rip">R.I.P</p>
+              <h3 class="grave__name">StreamFlix</h3>
+              <p class="grave__years">2019&ndash;2026</p>
+              <p class="grave__epitaph">UNWATCHED SINCE '24</p>
+              <p class="grave__damage"><strong>$1,247</strong><span>lifetime damage</span></p>
+              <button class="btn-ghost" type="button">BURY IT &rarr; GUIDE</button>
+            </div>
+          </article>
+
+          <article class="grave glow-card" role="listitem" tabindex="0">
+            <svg class="grave__ghost" viewBox="0 0 64 80" aria-hidden="true" focusable="false">
+              <path d="M32 4C18 4 8 16 8 32v40c0 3 4 5 6 3l5-5 5 5c2 2 6 2 8 0l5-5 5 5c2 2 6 0 6-3V32C56 16 46 4 32 4z" fill="#e9e7ff" opacity="0.9"/>
+              <circle cx="24" cy="30" r="4" fill="#111133"/><circle cx="40" cy="30" r="4" fill="#111133"/>
+              <ellipse cx="32" cy="44" rx="5" ry="7" fill="#111133" opacity="0.7"/>
+            </svg>
+            <div class="grave__stone">
+              <p class="grave__rip">R.I.P</p>
+              <h3 class="grave__name">GymRat+</h3>
+              <p class="grave__years">2021&ndash;2025</p>
+              <p class="grave__epitaph">LAST VISIT: JAN 2</p>
+              <p class="grave__damage"><strong>$864</strong><span>lifetime damage</span></p>
+              <button class="btn-ghost" type="button">BURY IT &rarr; GUIDE</button>
+            </div>
+          </article>
+
+          <article class="grave glow-card" role="listitem" tabindex="0">
+            <svg class="grave__ghost" viewBox="0 0 64 80" aria-hidden="true" focusable="false">
+              <path d="M32 4C18 4 8 16 8 32v40c0 3 4 5 6 3l5-5 5 5c2 2 6 2 8 0l5-5 5 5c2 2 6 0 6-3V32C56 16 46 4 32 4z" fill="#e9e7ff" opacity="0.9"/>
+              <circle cx="24" cy="30" r="4" fill="#111133"/><circle cx="40" cy="30" r="4" fill="#111133"/>
+              <ellipse cx="32" cy="44" rx="5" ry="7" fill="#111133" opacity="0.7"/>
+            </svg>
+            <div class="grave__stone">
+              <p class="grave__rip">R.I.P</p>
+              <h3 class="grave__name">CloudVault</h3>
+              <p class="grave__years">2018&ndash;2026</p>
+              <p class="grave__epitaph">2 GB OF 2 TB USED</p>
+              <p class="grave__damage"><strong>$1,032</strong><span>lifetime damage</span></p>
+              <button class="btn-ghost" type="button">BURY IT &rarr; GUIDE</button>
+            </div>
+          </article>
+
+          <article class="grave glow-card" role="listitem" tabindex="0">
+            <svg class="grave__ghost" viewBox="0 0 64 80" aria-hidden="true" focusable="false">
+              <path d="M32 4C18 4 8 16 8 32v40c0 3 4 5 6 3l5-5 5 5c2 2 6 2 8 0l5-5 5 5c2 2 6 0 6-3V32C56 16 46 4 32 4z" fill="#e9e7ff" opacity="0.9"/>
+              <circle cx="24" cy="30" r="4" fill="#111133"/><circle cx="40" cy="30" r="4" fill="#111133"/>
+              <ellipse cx="32" cy="44" rx="5" ry="7" fill="#111133" opacity="0.7"/>
+            </svg>
+            <div class="grave__stone">
+              <p class="grave__rip">R.I.P</p>
+              <h3 class="grave__name">Free Trial &times;9</h3>
+              <p class="grave__years">FORGOT TO CANCEL</p>
+              <p class="grave__epitaph">ALL OF THEM</p>
+              <p class="grave__damage"><strong>$389</strong><span>lifetime damage</span></p>
+              <button class="btn-ghost" type="button">BURY IT &rarr; GUIDE</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Haunting Total: meteors + sparkles number + scan card -->
+    <section class="total" id="total">
+      <div class="section-inner">
+        <div class="total__band" id="meteor-band">
+          <canvas class="total__embers" id="stats-embers" aria-hidden="true"></canvas>
+          <div class="total__meteors" id="meteors" aria-hidden="true"></div>
+          <p class="total__counter sparkle-text" id="counter" data-target="3532" aria-label="$3,532">$0</p>
+          <p class="total__caption">LIFETIME SPEND ON SUBSCRIPTIONS NO LONGER USED</p>
+        </div>
+
+        <div class="scan-card" id="scan-card">
+          <p class="scan-card__title">SCANNING INBOX&hellip;</p>
+          <p class="scan-card__line"><span class="money">2,847</span> receipts parsed &middot; <span class="money">14</span> spirits found</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline: the life and death of a subscription -->
+    <section class="timeline" id="timeline">
+      <div class="section-inner">
+        <p class="kicker">THE LIFECYCLE</p>
+        <h2 class="section-title">The life and death of a subscription</h2>
+        <div class="tl" id="tl">
+          <div class="tl__track" aria-hidden="true"><div class="tl__progress" id="tl-progress"></div></div>
+          <ol class="tl__list">
+            <li class="tl__item">
+              <span class="tl__dot" aria-hidden="true"></span>
+              <h3 class="tl__year">2019</h3>
+              <p class="tl__body">The free trial. You swear you'll cancel.</p>
+            </li>
+            <li class="tl__item">
+              <span class="tl__dot" aria-hidden="true"></span>
+              <h3 class="tl__year">2020</h3>
+              <p class="tl__body">The forgetting. $12.99, monthly, invisible.</p>
+            </li>
+            <li class="tl__item">
+              <span class="tl__dot" aria-hidden="true"></span>
+              <h3 class="tl__year">2023</h3>
+              <p class="tl__body">The price hike you never noticed. Now $19.99.</p>
+            </li>
+            <li class="tl__item">
+              <span class="tl__dot" aria-hidden="true"></span>
+              <h3 class="tl__year">2026</h3>
+              <p class="tl__body">The exhumation. Subscription Graveyard finds it: <span class="money">$1,247</span> lifetime.</p>
+            </li>
+            <li class="tl__item tl__item--gold">
+              <span class="tl__dot" aria-hidden="true"></span>
+              <h3 class="tl__year">&dagger;</h3>
+              <p class="tl__body">The burial. One click. Rest in peace.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Reckoning: pulse beams + container-scroll dashboard -->
+    <section class="reckoning" id="reckoning">
+      <svg class="beams" id="beams" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="pulse-grad" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#8FE8FF"/><stop offset="100%" stop-color="#7A6CF0"/>
+          </linearGradient>
+        </defs>
+        <path class="beams__base" d="M150 560 C 180 380, 320 260, 500 210"/>
+        <path class="beams__base" d="M500 560 C 500 430, 500 320, 500 210"/>
+        <path class="beams__base" d="M850 560 C 820 380, 680 260, 500 210"/>
+        <path class="beams__pulse" style="--pd:0s"  d="M150 560 C 180 380, 320 260, 500 210"/>
+        <path class="beams__pulse" style="--pd:1.3s" d="M500 560 C 500 430, 500 320, 500 210"/>
+        <path class="beams__pulse" style="--pd:2.6s" d="M850 560 C 820 380, 680 260, 500 210"/>
+      </svg>
+      <div class="section-inner">
+        <p class="kicker">THE RECKONING</p>
+        <h2 class="section-title">Your whole graveyard, on one screen</h2>
+        <div class="dash-wrap">
+          <div class="dash" id="dash">
+            <div class="dash__bar" aria-hidden="true"><i></i><i></i><i></i><span>graveyard.app &middot; your plots</span></div>
+            <table class="dash__table">
+              <thead>
+                <tr><th>SPIRIT</th><th>HAUNTING SINCE</th><th>MONTHLY</th><th>LIFETIME</th><th>STATUS</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>StreamFlix</td><td>2019</td><td class="money">$12.99</td><td class="money">$1,247</td><td><span class="tag tag--active">ACTIVE</span></td></tr>
+                <tr><td>GymRat+</td><td>2021</td><td class="money">$29.00</td><td class="money">$864</td><td><span class="tag tag--active">ACTIVE</span></td></tr>
+                <tr><td>CloudVault</td><td>2018</td><td class="money">$9.99</td><td class="money">$1,032</td><td><span class="tag tag--active">ACTIVE</span></td></tr>
+                <tr><td>Free Trial &times;9</td><td>various</td><td class="money">&mdash;</td><td class="money">$389</td><td><span class="tag tag--buried">BURIED</span></td></tr>
+                <tr class="dash__totals"><td>TOTAL EXTRACTION</td><td></td><td></td><td class="money">$3,532</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="dash-cta"><a class="btn-ghost" href="dashboard/dist/index.html">OPEN THE LIVE DASHBOARD &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testi" id="testi">
+      <div class="section-inner">
+        <p class="kicker">THE MOURNERS &middot; KIND WORDS</p>
+        <h2 class="section-title">They buried theirs</h2>
+        <div class="testi__wrap" id="testi-wrap">
+          <div class="testi__stack" aria-hidden="true">
+            <div class="testi__avatar" data-i="0">
+              <svg viewBox="0 0 80 80"><circle cx="40" cy="30" r="14" fill="#8d86c9"/><path d="M14 72c3-16 13-24 26-24s23 8 26 24" fill="#8d86c9"/></svg>
+            </div>
+            <div class="testi__avatar" data-i="1">
+              <svg viewBox="0 0 80 80"><circle cx="40" cy="30" r="14" fill="#7a6cf0"/><path d="M14 72c3-16 13-24 26-24s23 8 26 24" fill="#7a6cf0"/></svg>
+            </div>
+            <div class="testi__avatar" data-i="2">
+              <svg viewBox="0 0 80 80"><circle cx="40" cy="30" r="14" fill="#8fe8ff"/><path d="M14 72c3-16 13-24 26-24s23 8 26 24" fill="#8fe8ff"/></svg>
+            </div>
+          </div>
+          <div class="testi__quotes">
+            <figure class="testi__quote" data-i="0">
+              <blockquote>&ldquo;It found a VPN I'd been paying for since 2019. I don't remember ever using a VPN.&rdquo;</blockquote>
+              <figcaption>PRIYA &middot; found <span class="money">$840</span></figcaption>
+            </figure>
+            <figure class="testi__quote" data-i="1">
+              <blockquote>&ldquo;Twelve subscriptions. I knew about six.&rdquo;</blockquote>
+              <figcaption>MARCUS &middot; found <span class="money">$2,100</span></figcaption>
+            </figure>
+            <figure class="testi__quote" data-i="2">
+              <blockquote>&ldquo;The cancellation guides alone are worth it. Buried four in one evening.&rdquo;</blockquote>
+              <figcaption>ELENA &middot; found <span class="money">$1,375</span></figcaption>
+            </figure>
+            <div class="testi__nav">
+              <button class="testi__btn" id="testi-prev" type="button" aria-label="Previous testimonial">&larr;</button>
+              <button class="testi__btn" id="testi-next" type="button" aria-label="Next testimonial">&rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy: evervault-style reveal -->
+    <section class="privacy" id="privacy">
+      <div class="section-inner">
+        <p class="kicker">THE VOW &middot; PRIVACY</p>
+        <h2 class="section-title">We can look, never touch</h2>
+        <div class="vault" id="vault" tabindex="0" aria-label="gmail.readonly — we can look, never touch.">
+          <pre class="vault__matrix" id="vault-matrix" aria-hidden="true"></pre>
+          <div class="vault__center">
+            <span class="vault__lock" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              </svg>
+            </span>
+            <code>gmail.readonly</code> &mdash; we can look, never touch.
+          </div>
+        </div>
+        <ul class="privacy__bullets">
+          <li>READ-ONLY SCOPE</li>
+          <li>REVOKE ANY TIME</li>
+          <li>NO EMAIL LEAVES YOUR ACCOUNT</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Pricing: shine border -->
+    <section class="pricing" id="pricing">
+      <div class="section-inner">
+        <p class="kicker">THE TITHE &middot; PRICING</p>
+        <h2 class="section-title">One small offering</h2>
+        <div class="price-card shine" id="price-card">
+          <p class="price-card__plan">GRAVEKEEPER</p>
+          <p class="price-card__price">$4<span>/mo</span></p>
+          <ul class="price-card__list">
+            <li>Unlimited scans</li>
+            <li>Renewal alerts</li>
+            <li>Cancellation guides</li>
+            <li>Export to CSV</li>
+          </ul>
+          <button class="btn-gold" type="button">Start burying</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA: lamp + animated gradient + shiny button -->
+    <section class="cta" id="cta">
+      <div class="cta__blob cta__blob--1" aria-hidden="true"></div>
+      <div class="cta__blob cta__blob--2" aria-hidden="true"></div>
+      <div class="cta__blob cta__blob--3" aria-hidden="true"></div>
+      <div class="lamp" aria-hidden="true">
+        <div class="lamp__cone lamp__cone--left"></div>
+        <div class="lamp__cone lamp__cone--right"></div>
+        <div class="lamp__glow"></div>
+        <div class="lamp__core"></div>
+        <div class="lamp__tube"></div>
+        <div class="lamp__ceiling"></div>
+      </div>
+      <div class="section-inner cta__inner">
+        <h2 class="section-title cta__title">Lay your subscriptions to rest</h2>
+        <p class="lede">Connect your inbox, see the full graveyard, and start burying. The scan takes about ninety seconds.</p>
+        <button class="btn-shiny" id="cta-btn" type="button"><span>Exhume my inbox</span></button>
+        <p class="cta__fine">READ-ONLY GMAIL SCOPE &middot; REVOKE ANY TIME &middot; NO EMAIL LEAVES YOUR ACCOUNT</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>SUBSCRIPTION GRAVEYARD &middot; EST. WHEREVER FREE TRIALS GO TO DIE</p>
+    </footer>
+  </main>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
