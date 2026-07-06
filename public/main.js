@@ -593,33 +593,19 @@
     if (!content || !svg || !path) return;
 
     let len = 0;
-    let drawn = 0;      /* lerped drawn-fraction for buttery reversal */
-    let visible = true; /* false when there's no gutter to live in */
+    let drawn = 0; /* lerped drawn-fraction for buttery reversal */
 
-    const CONTENT_COL = 1080; /* .section-inner max-width */
-    const RIGHT_MARGIN = 30;  /* clearance from the scrollbar/edge */
-    const MIN_GUTTER = 74;    /* below this the wave can't fit beside content */
-
-    /* build a smooth serpentine down the RIGHT GUTTER — the empty band
-       beside the centred content column — so it never crosses text/cards */
+    /* build a smooth serpentine down the full content height. It lives
+       BEHIND the content (z-index:-1) so it can weave across the page —
+       text and cards always paint on top, so nothing is ever hidden. */
     function build() {
       const w = content.clientWidth;
       const h = content.scrollHeight;
-
-      const colRight = (w + Math.min(CONTENT_COL, w)) / 2; /* right edge of the content column */
-      const gutter = w - colRight - RIGHT_MARGIN;
-
-      visible = gutter >= MIN_GUTTER;
-      svg.style.display = visible ? "" : "none";
-      if (!visible) return;
-
       svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
 
-      const bandLeft = colRight + 26;      /* clear of the column edge (+bezier overshoot & stroke) */
-      const bandRight = w - RIGHT_MARGIN;
-      const cx = (bandLeft + bandRight) / 2;
-      const amp = (bandRight - bandLeft) / 2;
-      const swings = Math.max(6, Math.round(h / 560)); /* ~one weave per ~0.6 screens */
+      const cx = w * (isMobile ? 0.62 : 0.66);              /* wave centre */
+      const amp = Math.min(w * (isMobile ? 0.26 : 0.24), 300); /* left↔right swing */
+      const swings = Math.max(6, Math.round(h / 560));      /* ~one weave per ~0.6 screens */
       const seg = h / swings;
 
       /* start at the TOP-RIGHT, then alternate rightmost/leftmost with
@@ -640,7 +626,6 @@
     }
 
     function paint(frac) {
-      if (!visible) return;
       path.style.strokeDashoffset = String(len * (1 - frac));
       trail.style.strokeDashoffset = String(len * (1 - frac));
       if (tip) {

@@ -243,15 +243,17 @@ button { cursor: pointer; font: inherit; }
 /* ============================================================
    SHARED SECTION CHROME
    ============================================================ */
-.content { position: relative; background: var(--night-0); }
+/* z-index:0 makes .content a stacking context so the spine (z-index:-1)
+   sits above its background but BEHIND all section content */
+.content { position: relative; z-index: 0; background: var(--night-0); }
 
-/* ---------- scroll-drawn wavy spine ---------- */
+/* ---------- scroll-drawn wavy spine (behind the text/graphics) ---------- */
 .spine {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 3; /* above section backgrounds, lives only in the empty right gutter */
+  z-index: -1; /* behind section content — text & cards always paint on top */
   pointer-events: none;
   overflow: visible;
 }
