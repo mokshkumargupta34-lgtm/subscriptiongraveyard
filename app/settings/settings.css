@@ -1,0 +1,69 @@
+.st-body {
+  min-height: 100vh;
+  background: radial-gradient(60% 40% at 20% 0%, rgba(122, 108, 240, 0.08), transparent), #07071c;
+  color: #cfd0ef;
+  font-family: "Spectral", Georgia, serif;
+  font-weight: 300;
+}
+.st-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem clamp(1.25rem, 5vw, 3rem);
+  border-bottom: 1px solid rgba(122, 108, 240, 0.15);
+}
+.st-top a {
+  font-family: "Cinzel", serif; font-weight: 700; font-size: 0.95rem;
+  letter-spacing: 0.12em; color: #e9e7ff; text-decoration: none;
+}
+.st-main { max-width: 680px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3rem) 5rem; }
+.st-kicker {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.72rem; letter-spacing: 0.4em; color: #f0c96e; margin-bottom: 1rem;
+}
+.st-h1 {
+  font-family: "Cinzel", serif; font-weight: 600;
+  font-size: clamp(1.7rem, 4vw, 2.4rem); color: #e9e7ff;
+  letter-spacing: 0.04em; margin: 0 0 2.2rem;
+}
+.st-card {
+  background: rgba(17, 17, 51, 0.75);
+  border: 1px solid rgba(122, 108, 240, 0.25);
+  border-radius: 16px;
+  padding: 1.6rem 1.7rem;
+  margin-bottom: 1.4rem;
+}
+.st-card h2 {
+  font-family: "Cinzel", serif; font-weight: 600; font-size: 1.1rem;
+  letter-spacing: 0.05em; color: #e9e7ff; margin: 0 0 0.5rem;
+}
+.st-card p { margin: 0.3rem 0 1rem; color: #9d9cd0; font-size: 0.95rem; }
+.st-row { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
+.st-badge {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  border-radius: 999px; padding: 0.35rem 0.8rem;
+}
+.st-badge--on { color: #8fe8ff; border: 1px solid rgba(143, 232, 255, 0.4); }
+.st-badge--off { color: #a3a0d6; border: 1px solid rgba(141, 134, 201, 0.4); }
+.st-btn {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.66rem; letter-spacing: 0.14em;
+  border-radius: 999px; padding: 0.6rem 1.3rem;
+  cursor: pointer; background: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.st-btn--gold { color: #f0c96e; border: 1px solid rgba(240, 201, 110, 0.65); }
+.st-btn--gold:hover { background: #f0c96e; color: #07071c; }
+.st-btn--ghost { color: #a3a0d6; border: 1px solid rgba(141, 134, 201, 0.5); }
+.st-btn--ghost:hover { color: #e9e7ff; border-color: #7a6cf0; }
+.st-btn--danger { color: #ff8a8a; border: 1px solid rgba(255, 138, 138, 0.5); }
+.st-btn--danger:hover { background: rgba(255, 138, 138, 0.12); }
+.st-btn:focus-visible { outline: 2px solid #f0c96e; outline-offset: 3px; }
+.st-fine {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.6rem; letter-spacing: 0.18em; color: #77749f; margin-top: 0.8rem;
+}
+.st-flash {
+  border: 1px solid rgba(191, 233, 205, 0.4); color: #bfe9cd;
+  border-radius: 12px; padding: 0.8rem 1.2rem; margin-bottom: 1.4rem;
+  font-size: 0.92rem;
+}

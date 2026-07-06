@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
       beforeFiles: [],
       afterFiles: [
         { source: "/", destination: "/home.html" },
-        { source: "/login", destination: "/login.html" },
         { source: "/privacy", destination: "/privacy.html" },
         { source: "/terms", destination: "/terms.html" },
         { source: "/dashboard", destination: "/dashboard/index.html" },
