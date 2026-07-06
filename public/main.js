@@ -603,9 +603,9 @@
       const h = content.scrollHeight;
       svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
 
-      const cx = w * (isMobile ? 0.62 : 0.66);              /* wave centre */
-      const amp = Math.min(w * (isMobile ? 0.26 : 0.24), 300); /* left↔right swing */
-      const swings = Math.max(6, Math.round(h / 560));      /* ~one weave per ~0.6 screens */
+      const cx = w * 0.5;                       /* centre on the page */
+      const amp = Math.min(w * 0.4, 560);       /* swing nearly edge-to-edge */
+      const swings = Math.max(6, Math.round(h / 560)); /* ~one weave per ~0.6 screens */
       const seg = h / swings;
 
       /* start at the TOP-RIGHT, then alternate rightmost/leftmost with
