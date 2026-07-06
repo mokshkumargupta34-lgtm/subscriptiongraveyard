@@ -108,6 +108,20 @@
   <!-- ============ CONTENT ============ -->
   <main class="content">
 
+    <!-- scroll-drawn wavy spine: starts top-right as the video ends, snakes down with you -->
+    <svg class="spine" id="spine" aria-hidden="true" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="spine-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8fe8ff" />
+          <stop offset="55%" stop-color="#7a6cf0" />
+          <stop offset="100%" stop-color="#f0c96e" />
+        </linearGradient>
+      </defs>
+      <path class="spine__trail" id="spine-trail" />
+      <path class="spine__path" id="spine-path" />
+      <circle class="spine__tip" id="spine-tip" r="7" />
+    </svg>
+
     <!-- Manifesto: scroll-driven text reveal -->
     <section class="manifesto" id="manifesto">
       <div class="manifesto__finale" aria-hidden="true"></div>

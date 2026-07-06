@@ -245,6 +245,47 @@ button { cursor: pointer; font: inherit; }
    ============================================================ */
 .content { position: relative; background: var(--night-0); }
 
+/* ---------- scroll-drawn wavy spine ---------- */
+.spine {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+  overflow: visible;
+  /* luminous thread: lightens over the dark sections instead of hiding text */
+  mix-blend-mode: screen;
+}
+.spine__trail {
+  fill: none;
+  stroke: rgba(122, 108, 240, 0.14);
+  stroke-width: 10;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.spine__path {
+  fill: none;
+  stroke: url(#spine-grad);
+  stroke-width: 8;               /* thick */
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 10px rgba(122, 108, 240, 0.75));
+}
+.spine__tip {
+  fill: #e9e7ff;
+  filter: drop-shadow(0 0 12px rgba(233, 231, 255, 0.9));
+  opacity: 0;
+}
+@media (max-width: 768px) {
+  .spine__path { stroke-width: 6; }
+  .spine__trail { stroke-width: 8; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spine__tip { display: none; }
+  .spine__path { filter: none; }
+}
+
 .section-inner {
   position: relative; z-index: 2;
   max-width: 1080px; margin: 0 auto;

@@ -31,6 +31,7 @@
     buildManifesto(true);
     initTestimonials(false);
     initHeader();
+    initSpine(); /* draws the full static spine, no scroll animation */
     initCtaButton();
     return;
   }
@@ -55,6 +56,7 @@
   initTestimonials(true);
   initVault();
   initLamp();
+  initSpine();
   initCtaButton();
 
   /* ============================================================
@@ -573,6 +575,82 @@
       lp += (target - lp) * 0.18;
       if (Math.abs(target - lp) < 0.001) lp = target;
       cta.style.setProperty("--lp", lp.toFixed(4));
+    });
+  }
+
+  /* ============================================================
+     SPINE — a thick wavy line drawn down the content on scroll.
+     Starts top-right where the content begins (as the video ends),
+     snakes left↔right, its glowing tip tracking your scroll; the
+     drawn length reverses when you scroll back up.
+     ============================================================ */
+  function initSpine() {
+    const content = document.querySelector(".content");
+    const svg = $("spine");
+    const path = $("spine-path");
+    const trail = $("spine-trail");
+    const tip = $("spine-tip");
+    if (!content || !svg || !path) return;
+
+    let len = 0;
+    let drawn = 0; /* lerped drawn-fraction for buttery reversal */
+
+    /* build a smooth serpentine the full height of the content */
+    function build() {
+      const w = content.clientWidth;
+      const h = content.scrollHeight;
+      svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+
+      const cx = w * (isMobile ? 0.78 : 0.72);             /* wave centre, right side */
+      const amp = Math.min(w * (isMobile ? 0.12 : 0.2), 240); /* left↔right swing */
+      const swings = Math.max(6, Math.round(h / 560));     /* ~one weave per ~0.6 screens */
+      const seg = h / swings;
+
+      /* start at the TOP-RIGHT, then alternate rightmost/leftmost with
+         cubic beziers so every crossover is smooth */
+      let d = `M ${(cx + amp).toFixed(1)} 0`;
+      for (let i = 0; i < swings; i++) {
+        const y0 = i * seg;
+        const y1 = (i + 1) * seg;
+        const fromX = cx + (i % 2 === 0 ? amp : -amp);
+        const toX = cx + (i % 2 === 0 ? -amp : amp);
+        d += ` C ${fromX.toFixed(1)} ${(y0 + seg * 0.4).toFixed(1)}, ${toX.toFixed(1)} ${(y1 - seg * 0.4).toFixed(1)}, ${toX.toFixed(1)} ${y1.toFixed(1)}`;
+      }
+      path.setAttribute("d", d);
+      trail.setAttribute("d", d);
+      len = path.getTotalLength();
+      path.style.strokeDasharray = String(len);
+      trail.style.strokeDasharray = String(len);
+    }
+
+    function paint(frac) {
+      path.style.strokeDashoffset = String(len * (1 - frac));
+      trail.style.strokeDashoffset = String(len * (1 - frac));
+      if (tip) {
+        if (frac > 0.001 && frac < 0.999) {
+          const pt = path.getPointAtLength(len * frac);
+          tip.setAttribute("cx", String(pt.x));
+          tip.setAttribute("cy", String(pt.y));
+          tip.style.opacity = "1";
+        } else {
+          tip.style.opacity = "0";
+        }
+      }
+    }
+
+    build();
+    window.addEventListener("resize", () => { build(); });
+
+    if (reducedMotion.matches) { paint(1); return; }
+
+    scrollFx.push(() => {
+      const rect = content.getBoundingClientRect();
+      const vh = window.innerHeight;
+      /* draw a little ahead of the viewport so the tip leads you */
+      const target = clamp01((vh * 0.82 - rect.top) / content.scrollHeight);
+      drawn += (target - drawn) * 0.16;
+      if (Math.abs(target - drawn) < 0.0004) drawn = target;
+      paint(drawn);
     });
   }
 
