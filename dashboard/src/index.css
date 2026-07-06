@@ -14,7 +14,7 @@
   --color-gold: #f0c96e;
   --color-ink: #cfd0ef;
   --color-ink-2: #9d9cd0;
-  --color-muted: #8f8cc9;
+  --color-muted: #a3a0d6; /* bumped from #8f8cc9 for contrast on night-0 */
 
   --font-display: "Cinzel", "Times New Roman", serif;
   --font-body: "Spectral", Georgia, serif;

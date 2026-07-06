@@ -30,7 +30,7 @@
     $("counter").textContent = fmt(COUNTER_TARGET);
     buildManifesto(true);
     initTestimonials(false);
-    initBuryButtons();
+    initHeader();
     initCtaButton();
     return;
   }
@@ -45,7 +45,7 @@
   buildManifesto(false);
   initFlipWords();
   initGraveGlow();
-  initBuryButtons();
+  initHeader();
   initMeteors();
   initCounter();
   initGlints();
@@ -389,16 +389,14 @@
     });
   }
 
-  function initBuryButtons() {
-    document.querySelectorAll(".grave").forEach((grave) => {
-      const btn = grave.querySelector(".btn-ghost");
-      const original = btn.innerHTML;
-      btn.addEventListener("click", () => {
-        const buried = grave.classList.toggle("is-buried");
-        btn.innerHTML = buried ? "RESTS IN PEACE ✓" : original;
-        btn.setAttribute("aria-pressed", buried ? "true" : "false");
-      });
-    });
+  /* sticky header — slides in after 20% of the first viewport so it
+     never covers the film's opening frame */
+  function initHeader() {
+    const head = $("site-head");
+    const onScroll = () =>
+      head.classList.toggle("show", window.scrollY > window.innerHeight * 0.2);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
   }
 
   /* ============================================================
@@ -420,6 +418,10 @@
 
   function initCounter() {
     const counter = $("counter");
+    /* static $3,532 stays in the HTML for crawlers/no-JS; only zero it
+       out when we can actually animate it back up */
+    if (!("IntersectionObserver" in window)) return;
+    counter.firstChild.textContent = "$0";
     const io = new IntersectionObserver((entries) => {
       if (!entries[0].isIntersecting) return;
       io.disconnect();
@@ -575,17 +577,18 @@
   }
 
   /* ============================================================
-     CTA — both primary actions lead to the sign-up page
+     CTA — every primary action leads to /login (waitlist until
+     Google auth ships)
      ============================================================ */
   function initCtaButton() {
     const cta = $("cta-btn");
     const label = cta.querySelector("span");
     cta.addEventListener("click", () => {
       label.textContent = "Summoning…";
-      setTimeout(() => (window.location.href = "signup.html"), 350);
+      setTimeout(() => (window.location.href = "/login"), 350);
     });
     document.querySelectorAll(".btn-gold").forEach((b) =>
-      b.addEventListener("click", () => (window.location.href = "signup.html"))
+      b.addEventListener("click", () => (window.location.href = "/login"))
     );
   }
 })();

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — Subscription Graveyard</title>
+  <meta name="description" content="What Subscription Graveyard accesses, what it stores, and how to delete everything. Read-only Gmail access; raw email content is never stored." />
+  <link rel="canonical" href="https://subscriptiongraveyard.vercel.app/privacy" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #07071c; color: #cfd0ef; font-family: "Spectral", Georgia, serif; font-weight: 300; line-height: 1.7; }
+    .top { padding: 1.4rem clamp(1.25rem, 5vw, 3rem); border-bottom: 1px solid rgba(122,108,240,.15); }
+    .top a { font-family: "Cinzel", serif; font-weight: 700; font-size: .95rem; letter-spacing: .12em; color: #e9e7ff; text-decoration: none; }
+    main { max-width: 760px; margin: 0 auto; padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem) 5rem; }
+    .kicker { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .72rem; letter-spacing: .4em; color: #f0c96e; margin-bottom: 1rem; }
+    h1 { font-family: "Cinzel", serif; font-weight: 600; font-size: clamp(1.9rem, 4.5vw, 2.8rem); color: #e9e7ff; letter-spacing: .04em; margin-bottom: .6rem; }
+    .updated { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .68rem; letter-spacing: .2em; color: #a3a0d6; margin-bottom: 2.6rem; }
+    h2 { font-family: "Cinzel", serif; font-weight: 600; font-size: 1.25rem; color: #e9e7ff; letter-spacing: .04em; margin: 2.4rem 0 .8rem; }
+    p, li { color: #cfd0ef; }
+    ul { padding-left: 1.3rem; margin: .6rem 0 1rem; }
+    li { margin-bottom: .45rem; }
+    strong { color: #e9e7ff; font-weight: 500; }
+    .vow { background: #111133; border: 1px solid rgba(122,108,240,.3); border-radius: 12px; padding: 1.2rem 1.4rem; margin: 1.4rem 0; }
+    a { color: #f0c96e; }
+    a:focus-visible { outline: 2px solid #f0c96e; outline-offset: 3px; }
+    footer { text-align: center; padding: 2.5rem 1rem 3rem; border-top: 1px solid rgba(122,108,240,.14); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .66rem; letter-spacing: .24em; color: #a3a0d6; }
+    footer a { color: #a3a0d6; text-decoration: none; margin: 0 .8rem; }
+    footer a:hover { color: #e9e7ff; }
+  </style>
+</head>
+<body>
+  <div class="top"><a href="/">SUBSCRIPTION GRAVEYARD</a></div>
+  <main>
+    <p class="kicker">THE VOW · IN WRITING</p>
+    <h1>Privacy Policy</h1>
+    <p class="updated">LAST UPDATED: JULY 6, 2026</p>
+
+    <p>Subscription Graveyard ("we", "us") helps you find recurring subscriptions hiding in your Gmail inbox and cancel the ones you no longer use. This policy explains exactly what we access, what we store, and how you can make us forget everything.</p>
+
+    <h2>What we access</h2>
+    <ul>
+      <li><strong>Google account basics</strong> — your email address, name, and profile image, used to create and identify your account.</li>
+      <li><strong>Gmail, read-only</strong> — when you explicitly connect Gmail, we request the <code>gmail.readonly</code> scope. We can read; we can never send, modify, delete, or label anything. We query only messages that look like receipts, invoices, and renewal notices.</li>
+    </ul>
+
+    <h2>What we store</h2>
+    <ul>
+      <li><strong>Parsed subscription metadata only</strong>: merchant name, amount, currency, charge date, inferred billing cadence, and the Gmail message ID (so we never process the same receipt twice).</li>
+      <li><strong>We never store raw email content.</strong> No bodies, no attachments, no full subject archives. Emails are parsed in memory and only the extracted fields above are kept.</li>
+      <li>OAuth tokens are stored server-side, encrypted at rest (AES-256-GCM), and are never exposed to the browser.</li>
+    </ul>
+
+    <h2>What we never do</h2>
+    <ul>
+      <li>We never sell, rent, or share your data with advertisers or data brokers.</li>
+      <li>We never use your Gmail data to train machine-learning models.</li>
+      <li>No human reads your data except with your explicit consent for support, or as required for security investigations and legal compliance.</li>
+    </ul>
+
+    <div class="vow">
+      <p><strong>Google API Services — Limited Use disclosure.</strong> Subscription Graveyard's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+    </div>
+
+    <h2>Retention</h2>
+    <p>Parsed subscription records are kept while your account is active so your graveyard stays accurate. Scan logs are pruned after 90 days. If you disconnect Gmail, we stop scanning immediately; stored parsed records remain until you delete them or your account.</p>
+
+    <h2>Deletion &amp; revoking access</h2>
+    <ul>
+      <li>You can disconnect Gmail at any time from Settings, which revokes our token with Google immediately.</li>
+      <li>You can also revoke access yourself at <a href="https://myaccount.google.com/permissions" rel="noopener">myaccount.google.com/permissions</a>.</li>
+      <li>Deleting your account removes all rows associated with you — subscriptions, parsed receipts, scan history, and tokens — permanently and within 30 days from backups.</li>
+    </ul>
+
+    <h2>Payments</h2>
+    <p>Billing for the Gravekeeper plan is handled by Stripe. We never see or store your card number.</p>
+
+    <h2>Contact</h2>
+    <p>Questions, requests, or hauntings: <a href="mailto:mokshmamta.ma@gmail.com">mokshmamta.ma@gmail.com</a>.</p>
+  </main>
+  <footer>
+    <a href="/privacy">PRIVACY</a> · <a href="/terms">TERMS</a> · <a href="mailto:mokshmamta.ma@gmail.com">CONTACT</a>
+    <p style="margin-top:1rem">© SUBSCRIPTION GRAVEYARD</p>
+  </footer>
+</body>
+</html>

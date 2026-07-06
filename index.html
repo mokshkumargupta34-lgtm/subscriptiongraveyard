@@ -11,11 +11,57 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%26%23129702;%3C/text%3E%3C/svg%3E" />
+  <link rel="canonical" href="https://subscriptiongraveyard.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Subscription Graveyard" />
+  <meta property="og:title" content="Subscription Graveyard — every forgotten subscription, still billing you from beyond" />
+  <meta property="og:description" content="Connect Gmail read-only, exhume every recurring subscription hiding in your inbox, see lifetime spend, and bury them with one-click cancellation guides." />
+  <meta property="og:url" content="https://subscriptiongraveyard.vercel.app/" />
+  <meta property="og:image" content="https://subscriptiongraveyard.vercel.app/media/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Subscription Graveyard" />
+  <meta name="twitter:description" content="One Gmail scan. Every recurring charge, resurrected and counted — then buried." />
+  <meta name="twitter:image" content="https://subscriptiongraveyard.vercel.app/media/og.jpg" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preload" as="image" href="media/poster.jpg" />
   <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Subscription Graveyard",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "url": "https://subscriptiongraveyard.vercel.app/",
+    "description": "Connects to Gmail read-only, finds every recurring subscription in your receipts, shows lifetime spend, and provides one-click cancellation guides.",
+    "offers": { "@type": "Offer", "price": "4.00", "priceCurrency": "USD", "description": "Gravekeeper plan, monthly" }
+  }
+  </script>
 </head>
 <body>
+
+  <!-- sticky header — appears after the film's opening -->
+  <header class="site-head" id="site-head">
+    <a class="site-head__brand" href="/">
+      <svg viewBox="0 0 64 80" aria-hidden="true" focusable="false">
+        <path d="M32 4C18 4 8 16 8 32v40c0 3 4 5 6 3l5-5 5 5c2 2 6 2 8 0l5-5 5 5c2 2 6 0 6-3V32C56 16 46 4 32 4z" fill="#e9e7ff"/>
+        <circle cx="24" cy="30" r="4.5" fill="#111133"/><circle cx="40" cy="30" r="4.5" fill="#111133"/>
+        <ellipse cx="32" cy="44" rx="5" ry="7" fill="#111133" opacity=".75"/>
+      </svg>
+      <span>SUBSCRIPTION GRAVEYARD</span>
+    </a>
+    <nav class="site-head__nav" aria-label="Site">
+      <a href="#seance">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/dashboard">Dashboard</a>
+    </nav>
+    <a class="site-head__cta" href="/login">Exhume my inbox</a>
+  </header>
 
   <!-- ============ SCROLL-SCRUB VIDEO HERO ============ -->
   <div class="rig" id="rig">
@@ -164,7 +210,7 @@
               <p class="grave__years">2019&ndash;2026</p>
               <p class="grave__epitaph">UNWATCHED SINCE '24</p>
               <p class="grave__damage"><strong>$1,247</strong><span>lifetime damage</span></p>
-              <button class="btn-ghost" type="button">BURY IT &rarr; GUIDE</button>
+              <a class="btn-ghost" href="/login">BURY IT &rarr; GUIDE</a>
             </div>
           </article>
 
@@ -180,7 +226,7 @@
               <p class="grave__years">2021&ndash;2025</p>
               <p class="grave__epitaph">LAST VISIT: JAN 2</p>
               <p class="grave__damage"><strong>$864</strong><span>lifetime damage</span></p>
-              <button class="btn-ghost" type="button">BURY IT &rarr; GUIDE</button>
+              <a class="btn-ghost" href="/login">BURY IT &rarr; GUIDE</a>
             </div>
           </article>
 
@@ -196,7 +242,7 @@
               <p class="grave__years">2018&ndash;2026</p>
               <p class="grave__epitaph">2 GB OF 2 TB USED</p>
               <p class="grave__damage"><strong>$1,032</strong><span>lifetime damage</span></p>
-              <button class="btn-ghost" type="button">BURY IT &rarr; GUIDE</button>
+              <a class="btn-ghost" href="/login">BURY IT &rarr; GUIDE</a>
             </div>
           </article>
 
@@ -212,7 +258,7 @@
               <p class="grave__years">FORGOT TO CANCEL</p>
               <p class="grave__epitaph">ALL OF THEM</p>
               <p class="grave__damage"><strong>$389</strong><span>lifetime damage</span></p>
-              <button class="btn-ghost" type="button">BURY IT &rarr; GUIDE</button>
+              <a class="btn-ghost" href="/login">BURY IT &rarr; GUIDE</a>
             </div>
           </article>
         </div>
@@ -225,7 +271,7 @@
         <div class="total__band" id="meteor-band">
           <canvas class="total__embers" id="stats-embers" aria-hidden="true"></canvas>
           <div class="total__meteors" id="meteors" aria-hidden="true"></div>
-          <p class="total__counter sparkle-text" id="counter" data-target="3532" aria-label="$3,532">$0</p>
+          <p class="total__counter sparkle-text" id="counter" data-target="3532" aria-label="$3,532">$3,532</p>
           <p class="total__caption">LIFETIME SPEND ON SUBSCRIPTIONS NO LONGER USED</p>
         </div>
 
@@ -309,15 +355,16 @@
             </table>
           </div>
         </div>
-        <p class="dash-cta"><a class="btn-ghost" href="dashboard/dist/index.html">OPEN THE LIVE DASHBOARD &rarr;</a></p>
+        <p class="dash-cta"><a class="btn-ghost" href="/dashboard">OPEN THE LIVE DASHBOARD &rarr;</a></p>
       </div>
     </section>
 
     <!-- Testimonials -->
     <section class="testi" id="testi">
       <div class="section-inner">
-        <p class="kicker">THE MOURNERS &middot; KIND WORDS</p>
-        <h2 class="section-title">They buried theirs</h2>
+        <p class="kicker">THE MOURNERS &middot; WHAT EARLY USERS FIND</p>
+        <h2 class="section-title">What early users find</h2>
+        <p class="testi__note">Illustrative examples of typical findings &mdash; real quotes arrive with the beta.</p>
         <div class="testi__wrap" id="testi-wrap">
           <div class="testi__stack" aria-hidden="true">
             <div class="testi__avatar" data-i="0">
@@ -418,6 +465,12 @@
 
     <footer class="footer">
       <p>SUBSCRIPTION GRAVEYARD &middot; EST. WHEREVER FREE TRIALS GO TO DIE</p>
+      <nav class="footer__links" aria-label="Legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="mailto:mokshmamta.ma@gmail.com">Contact</a>
+      </nav>
+      <p class="footer__copy">&copy; Subscription Graveyard</p>
     </footer>
   </main>
 

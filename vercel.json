@@ -1,0 +1,28 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/dashboard/dist/index.html", "destination": "/dashboard", "statusCode": 301 },
+    { "source": "/dashboard/dist", "destination": "/dashboard", "statusCode": 301 },
+    { "source": "/signup", "destination": "/login", "statusCode": 301 }
+  ],
+  "rewrites": [
+    { "source": "/dashboard", "destination": "/dashboard/dist/index.html" },
+    { "source": "/dashboard/assets/:path*", "destination": "/dashboard/dist/assets/:path*" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    },
+    {
+      "source": "/media/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

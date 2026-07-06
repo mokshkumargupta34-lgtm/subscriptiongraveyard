@@ -40,6 +40,20 @@ Design tokens: night `#07071C/#111133/#1C1A4A`, violet `#7A6CF0`, teal `#8FE8FF`
 (scan/data), money green `#BFE9CD` (all $ amounts), gold `#F0C96E` (actions),
 moon `#E9E7FF`. Cinzel headings, Spectral body, system mono for data labels.
 
+## Routes & pages
+
+| Route | Purpose |
+|---|---|
+| `/` | The cinematic landing page |
+| `/login` | Waitlist capture (becomes Google sign-in in Phase 2) — all CTAs lead here |
+| `/dashboard` | The dashboard app (rewritten from `dashboard/dist/` via `vercel.json`; `serve.mjs` mirrors it locally) |
+| `/privacy` · `/terms` | Legal pages incl. the Google API Limited Use disclosure |
+| `404.html` | "This plot is empty." |
+
+SEO: OG/Twitter cards (`media/og.jpg`), canonical, JSON-LD `SoftwareApplication`
+($4/mo), `robots.txt`, `sitemap.xml`, ghost favicon set. A sticky translucent header
+appears after 20% of the first viewport so it never covers the film's opening.
+
 ## The live dashboard (`dashboard/`)
 
 A separate React + TypeScript + Tailwind CSS v4 + Framer Motion app (Vite), linked

@@ -15,7 +15,7 @@
   --gold: #f0c96e;
   --ink: #cfd0ef;
   --ink-2: #9d9cd0;
-  --muted: #8f8cc9;
+  --muted: #a3a0d6; /* bumped from #8f8cc9 for contrast on night-0 */
   --fine: #77749f;
 
   --font-display: "Cinzel", "Times New Roman", serif;
@@ -48,6 +48,54 @@ code { font-family: var(--font-mono); font-size: 0.9em; color: var(--moon); }
 
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
 button { cursor: pointer; font: inherit; }
+
+/* ============================================================
+   STICKY HEADER — appears after the film's opening
+   ============================================================ */
+.site-head {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 40;
+  display: flex; align-items: center; gap: 2rem;
+  padding: 0.7rem clamp(1rem, 4vw, 2.4rem);
+  background: rgba(7, 7, 28, 0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(122, 108, 240, 0.15);
+  transform: translateY(-110%);
+  transition: transform 0.4s ease;
+}
+.site-head.show { transform: translateY(0); }
+
+.site-head__brand {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.14em; color: var(--moon); text-decoration: none;
+}
+.site-head__brand svg { width: 18px; height: 22px; filter: drop-shadow(0 0 8px rgba(122, 108, 240, 0.7)); }
+
+.site-head__nav { display: flex; gap: 1.6rem; margin-left: auto; }
+.site-head__nav a {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.16em;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s ease;
+}
+.site-head__nav a:hover { color: var(--moon); }
+
+.site-head__cta {
+  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.14em;
+  color: var(--gold); text-decoration: none;
+  border: 1px solid rgba(240, 201, 110, 0.65);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  transition: background-color 0.22s ease, color 0.22s ease;
+}
+.site-head__cta:hover { background-color: var(--gold); color: var(--night-0); }
+
+@media (max-width: 640px) {
+  .site-head__nav { display: none; }
+  .site-head__cta { margin-left: auto; }
+}
 
 /* ============================================================
    RIG — scroll-scrubbed video hero
@@ -1023,6 +1071,22 @@ button { cursor: pointer; font: inherit; }
   color: var(--fine);
   border-top: 1px solid rgba(122, 108, 240, 0.14);
 }
+.footer__links { margin-top: 1.2rem; display: flex; justify-content: center; gap: 2rem; }
+.footer__links a {
+  color: var(--muted); text-decoration: none; letter-spacing: 0.2em;
+  transition: color 0.2s ease;
+}
+.footer__links a:hover { color: var(--moon); }
+.footer__copy { margin-top: 1rem; letter-spacing: 0.2em; }
+
+/* testimonials disclosure */
+.testi__note {
+  font-style: italic; font-size: 0.9rem; color: var(--muted);
+  margin-top: -0.4rem;
+}
+
+/* tombstone bury links (were buttons) */
+.grave .btn-ghost { display: inline-block; text-decoration: none; line-height: 1.5; }
 
 /* ============================================================
    MOBILE

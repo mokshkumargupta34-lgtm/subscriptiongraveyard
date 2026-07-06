@@ -25,6 +25,13 @@ const MIME = {
 createServer((req, res) => {
   let path = decodeURIComponent(new URL(req.url, "http://x").pathname);
   if (path.endsWith("/")) path += "index.html";
+
+  /* mirror the vercel.json routing locally */
+  if (path === "/dashboard") path = "/dashboard/dist/index.html";
+  else if (path.startsWith("/dashboard/assets/")) path = path.replace("/dashboard/assets/", "/dashboard/dist/assets/");
+  /* cleanUrls: extensionless paths resolve to .html */
+  else if (!extname(path) && existsSync(join(ROOT, path + ".html"))) path += ".html";
+
   const file = normalize(join(ROOT, path));
   if (!file.startsWith(normalize(ROOT)) || !existsSync(file) || !statSync(file).isFile()) {
     res.writeHead(404).end("not found");
