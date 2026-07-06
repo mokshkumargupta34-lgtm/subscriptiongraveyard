@@ -593,17 +593,33 @@
     if (!content || !svg || !path) return;
 
     let len = 0;
-    let drawn = 0; /* lerped drawn-fraction for buttery reversal */
+    let drawn = 0;      /* lerped drawn-fraction for buttery reversal */
+    let visible = true; /* false when there's no gutter to live in */
 
-    /* build a smooth serpentine the full height of the content */
+    const CONTENT_COL = 1080; /* .section-inner max-width */
+    const RIGHT_MARGIN = 30;  /* clearance from the scrollbar/edge */
+    const MIN_GUTTER = 74;    /* below this the wave can't fit beside content */
+
+    /* build a smooth serpentine down the RIGHT GUTTER — the empty band
+       beside the centred content column — so it never crosses text/cards */
     function build() {
       const w = content.clientWidth;
       const h = content.scrollHeight;
+
+      const colRight = (w + Math.min(CONTENT_COL, w)) / 2; /* right edge of the content column */
+      const gutter = w - colRight - RIGHT_MARGIN;
+
+      visible = gutter >= MIN_GUTTER;
+      svg.style.display = visible ? "" : "none";
+      if (!visible) return;
+
       svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
 
-      const cx = w * (isMobile ? 0.78 : 0.72);             /* wave centre, right side */
-      const amp = Math.min(w * (isMobile ? 0.12 : 0.2), 240); /* left↔right swing */
-      const swings = Math.max(6, Math.round(h / 560));     /* ~one weave per ~0.6 screens */
+      const bandLeft = colRight + 26;      /* clear of the column edge (+bezier overshoot & stroke) */
+      const bandRight = w - RIGHT_MARGIN;
+      const cx = (bandLeft + bandRight) / 2;
+      const amp = (bandRight - bandLeft) / 2;
+      const swings = Math.max(6, Math.round(h / 560)); /* ~one weave per ~0.6 screens */
       const seg = h / swings;
 
       /* start at the TOP-RIGHT, then alternate rightmost/leftmost with
@@ -624,6 +640,7 @@
     }
 
     function paint(frac) {
+      if (!visible) return;
       path.style.strokeDashoffset = String(len * (1 - frac));
       trail.style.strokeDashoffset = String(len * (1 - frac));
       if (tip) {
