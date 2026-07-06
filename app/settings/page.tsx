@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import { connectGmail, deleteAccountAction, disconnectGmailAction, signOutAction } from "@/app/actions";
 import { getGoogleAccount, hasGmailScope } from "@/lib/account";
 import { ConfirmSubmit } from "./delete-button";
+import { ScanCard } from "./scan-card";
 import "./settings.css";
 
 export const metadata: Metadata = { title: "Settings — Subscription Graveyard" };
@@ -64,6 +65,8 @@ export default async function SettingsPage({
             YOU CAN ALSO REVOKE ACCESS ANY TIME AT MYACCOUNT.GOOGLE.COM/PERMISSIONS
           </p>
         </section>
+
+        <ScanCard gmailConnected={gmailConnected} />
 
         <section className="st-card">
           <h2>Account</h2>
