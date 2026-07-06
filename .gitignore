@@ -1,6 +1,18 @@
-# raw source video — 44MB with audio, not scrub-friendly; derivatives live in media/
+# raw source video — 44MB with audio, not scrub-friendly; derivatives live in public/media/
 0704.mp4
 
-# dashboard build deps
+# deps & build output
+node_modules/
+.next/
 dashboard/node_modules/
+dashboard/dist/
 dashboard/tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# env — secrets never leave the machine
+.env
+.env.local
+.env*.local
+
+# drizzle migration artifacts are generated on demand
+drizzle/meta/

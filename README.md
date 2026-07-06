@@ -8,15 +8,32 @@ effect implemented in vanilla JS/CSS (no framework, no build step).
 ## Run locally
 
 ```bash
-node serve.mjs          # → http://localhost:8123
+npm install
+cp .env.example .env.local   # fill in at least DATABASE_URL/DIRECT_URL
+npm run dev                  # → http://localhost:3000 (full app: pages + API)
 ```
 
-**The server matters.** Scrubbing seeks constantly into unbuffered parts of the file,
-so the server must handle HTTP Range requests correctly and concurrently. A server
-with weak range support makes every seek hang — the symptom is a video that looks
-**frozen while you scroll**. `serve.mjs` (bundled, zero dependencies) does ranges
-properly, as do Netlify/Vercel/GitHub Pages in production. Never open `index.html`
-via `file://`.
+Static-only preview (no API routes): `node serve.mjs` → http://localhost:8123.
+
+**The server matters.** Scrubbing seeks constantly into unbuffered parts of the
+video, so the server must handle HTTP Range requests correctly. Next.js and
+`serve.mjs` both do; a server with weak range support makes the film look
+**frozen while you scroll**.
+
+### Stack (Phase 1+)
+
+Next.js 15 (App Router, TypeScript) serves the cinematic landing byte-identical
+from `public/home.html` via a rewrite — the scrub engine is untouched. Data layer:
+Supabase Postgres + Drizzle ORM (`db/schema.ts`: users, google_accounts, waitlist,
+merchants, cancel_guides, subscriptions, receipts, scans, events — receipts store
+parsed fields + Gmail message IDs only, never raw email). OAuth tokens get
+AES-256-GCM encryption via `lib/crypto.ts`.
+
+```bash
+npm run db:push    # create/update tables (needs DIRECT_URL with real password)
+npm run db:seed    # load ~50 merchants + cancellation guides
+npm run typecheck  # tsc --noEmit
+```
 
 ## Page anatomy
 

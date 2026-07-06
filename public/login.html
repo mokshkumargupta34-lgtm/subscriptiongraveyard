@@ -252,15 +252,24 @@
     (() => {
       "use strict";
       const form = document.getElementById("waitlist-form");
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
         if (!form.reportValidity()) return;
-        /* Phase 1 replaces this with POST /api/waitlist (Postgres `waitlist` table). */
+        const email = document.getElementById("email").value.trim();
         try {
-          const list = JSON.parse(localStorage.getItem("sg-waitlist") || "[]");
-          list.push({ email: document.getElementById("email").value, at: Date.now() });
-          localStorage.setItem("sg-waitlist", JSON.stringify(list));
-        } catch {}
+          await fetch("/api/waitlist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
+          });
+        } catch {
+          /* offline / static preview — keep a local copy so nothing is lost */
+          try {
+            const list = JSON.parse(localStorage.getItem("sg-waitlist") || "[]");
+            list.push({ email, at: Date.now() });
+            localStorage.setItem("sg-waitlist", JSON.stringify(list));
+          } catch {}
+        }
         form.classList.add("done");
       });
 

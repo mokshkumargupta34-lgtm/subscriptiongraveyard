@@ -1,11 +1,12 @@
 /* Tiny static server with proper HTTP Range support (video scrubbing
-   needs ranges). Usage: node serve.mjs [port]  — defaults to 8123. */
+   needs ranges). Serves the public/ folder — a static-only preview of
+   what `next dev` serves with API routes. Usage: node serve.mjs [port] */
 import { createServer } from "node:http";
 import { createReadStream, statSync, existsSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const ROOT = fileURLToPath(new URL(".", import.meta.url));
+const ROOT = fileURLToPath(new URL("./public/", import.meta.url));
 const PORT = Number(process.argv[2]) || 8123;
 
 const MIME = {
@@ -26,9 +27,9 @@ createServer((req, res) => {
   let path = decodeURIComponent(new URL(req.url, "http://x").pathname);
   if (path.endsWith("/")) path += "index.html";
 
-  /* mirror the vercel.json routing locally */
-  if (path === "/dashboard") path = "/dashboard/dist/index.html";
-  else if (path.startsWith("/dashboard/assets/")) path = path.replace("/dashboard/assets/", "/dashboard/dist/assets/");
+  /* mirror the next.config routing */
+  if (path === "/index.html") path = "/home.html";
+  else if (path === "/dashboard") path = "/dashboard/index.html";
   /* cleanUrls: extensionless paths resolve to .html */
   else if (!extname(path) && existsSync(join(ROOT, path + ".html"))) path += ".html";
 

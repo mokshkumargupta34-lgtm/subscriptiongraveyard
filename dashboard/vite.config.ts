@@ -4,8 +4,9 @@ import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
 
 export default defineConfig({
-  /* served at /dashboard via vercel.json rewrite (serve.mjs mirrors it locally) */
+  /* built straight into the Next app's public/ dir, served at /dashboard */
   base: "/dashboard/",
+  build: { outDir: "../public/dashboard", emptyOutDir: true },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
