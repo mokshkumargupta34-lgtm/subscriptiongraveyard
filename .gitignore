@@ -16,3 +16,7 @@ dashboard/tsconfig.tsbuildinfo
 
 # drizzle migration artifacts are generated on demand
 drizzle/meta/
+
+# test artifacts
+test-results/
+playwright-report/

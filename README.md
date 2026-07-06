@@ -33,7 +33,22 @@ AES-256-GCM encryption via `lib/crypto.ts`.
 npm run db:push    # create/update tables (needs DIRECT_URL with real password)
 npm run db:seed    # load ~50 merchants + cancellation guides
 npm run typecheck  # tsc --noEmit
+npm test           # vitest unit tests (parser + grouper, 15 tests)
+npm run e2e        # Playwright happy-path + error states (mocked Gmail)
 ```
+
+### Testing & quality
+
+- **Unit** (`lib/scan/*.test.ts`): receipt parsing + subscription grouping.
+- **E2E** (`e2e/happy-path.spec.ts`): login → scan fixtures → plots → bury →
+  CSV, plus mobile layout and error states (token revoked, zero receipts).
+  Driven by a **mocked Gmail** (`GMAIL_MOCK=1`) and a **dev-only credentials
+  auth provider** (`E2E_TEST=1`, refuses to run in production builds).
+- **Lighthouse** (desktop, production build): landing 99 / a11y 100 / SEO 100;
+  login 100 perf. First paint never waits on the video (poster-first).
+- CSP, `X-Frame-Options: DENY`, and other security headers in `next.config.ts`
+  (`'unsafe-eval'` is scoped to dev only — Next HMR needs it, prod doesn't).
+- Nightly cron also prunes `scans` older than 90 days (retention policy).
 
 ## Page anatomy
 

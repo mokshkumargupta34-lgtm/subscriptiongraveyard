@@ -14,6 +14,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     ...authConfig.callbacks,
 
     async signIn({ user, account, profile }) {
+      /* E2E provider (dev-only, see auth.config.ts): upsert a plain user */
+      if (account?.provider === "e2e") {
+        if (process.env.E2E_TEST !== "1" || process.env.NODE_ENV === "production" || !user.email) {
+          return false;
+        }
+        await db
+          .insert(users)
+          .values({ email: user.email.toLowerCase(), name: user.name ?? null })
+          .onConflictDoNothing({ target: users.email });
+        return true;
+      }
+
       if (account?.provider !== "google" || !user.email) return false;
 
       const [dbUser] = await db

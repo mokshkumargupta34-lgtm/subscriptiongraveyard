@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { isNotNull } from "drizzle-orm";
+import { isNotNull, lt } from "drizzle-orm";
 import { db } from "@/db";
-import { googleAccounts } from "@/db/schema";
+import { googleAccounts, scans } from "@/db/schema";
 import { runScan } from "@/lib/scan";
 import { sendRenewalAlerts } from "@/lib/alerts";
 
@@ -38,5 +38,9 @@ export async function GET(req: Request) {
   }
 
   const alerts = await sendRenewalAlerts();
+
+  /* retention: scan logs are pruned after 90 days (docs/dpa-notes.md) */
+  await db.delete(scans).where(lt(scans.startedAt, new Date(Date.now() - 90 * 86_400_000)));
+
   return NextResponse.json({ scanned: results.length, results, alerts });
 }

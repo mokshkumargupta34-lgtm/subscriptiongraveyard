@@ -44,7 +44,20 @@ async function refreshAccessToken(userId: string, refreshTokenEnc: string): Prom
   return data.access_token;
 }
 
+async function mockEmail(userId: string): Promise<string> {
+  const { users } = await import("@/db/schema");
+  const u = await db.query.users.findFirst({ where: eq(users.id, userId) });
+  return u?.email ?? "";
+}
+
 export async function getAccessToken(userId: string): Promise<string> {
+  if (process.env.GMAIL_MOCK === "1") {
+    const email = await mockEmail(userId);
+    if (email.startsWith("revoked@")) {
+      throw new GmailAuthError("token refresh failed (mock) — re-consent required");
+    }
+    return `mock:${email}`;
+  }
   const acct = await db.query.googleAccounts.findFirst({
     where: eq(googleAccounts.userId, userId),
   });
@@ -93,6 +106,11 @@ export async function listMessageIds(
   maxTotal: number,
   onPage?: (count: number) => void | Promise<void>
 ): Promise<string[]> {
+  if (token.startsWith("mock:")) {
+    if (token.includes("empty@")) return [];
+    const { mockMessages } = await import("./gmail-mock");
+    return mockMessages().map((m) => m.id).slice(0, maxTotal);
+  }
   const ids: string[] = [];
   let pageToken: string | undefined;
   while (ids.length < maxTotal) {
@@ -113,6 +131,10 @@ export async function listMessageIds(
 }
 
 export async function getMessageMeta(token: string, id: string): Promise<GmailMessageMeta | null> {
+  if (token.startsWith("mock:")) {
+    const { mockMessages } = await import("./gmail-mock");
+    return mockMessages().find((m) => m.id === id) ?? null;
+  }
   const res = await gmailFetch(
     token,
     `/messages/${id}?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date`
