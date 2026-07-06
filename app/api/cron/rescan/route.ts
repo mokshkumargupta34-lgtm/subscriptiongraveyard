@@ -3,6 +3,7 @@ import { isNotNull } from "drizzle-orm";
 import { db } from "@/db";
 import { googleAccounts } from "@/db/schema";
 import { runScan } from "@/lib/scan";
+import { sendRenewalAlerts } from "@/lib/alerts";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -36,5 +37,6 @@ export async function GET(req: Request) {
     }
   }
 
-  return NextResponse.json({ scanned: results.length, results });
+  const alerts = await sendRenewalAlerts();
+  return NextResponse.json({ scanned: results.length, results, alerts });
 }

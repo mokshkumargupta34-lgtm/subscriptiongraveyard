@@ -75,6 +75,8 @@ export const subscriptions = pgTable("subscriptions", {
   lifetimeCents: integer("lifetime_cents").notNull().default(0),
   confidence: real("confidence").notNull().default(0),
   alertsEnabled: boolean("alerts_enabled").notNull().default(true),
+  /* "Not a subscription" — kept (not deleted) so re-scans can't resurrect it */
+  dismissed: boolean("dismissed").notNull().default(false),
 });
 
 /* NEVER stores raw email content — parsed fields + the Gmail message id only. */

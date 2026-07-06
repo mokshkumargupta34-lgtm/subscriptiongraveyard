@@ -12,7 +12,6 @@ const nextConfig: NextConfig = {
         { source: "/", destination: "/home.html" },
         { source: "/privacy", destination: "/privacy.html" },
         { source: "/terms", destination: "/terms.html" },
-        { source: "/dashboard", destination: "/dashboard/index.html" },
       ],
       fallback: [],
     };

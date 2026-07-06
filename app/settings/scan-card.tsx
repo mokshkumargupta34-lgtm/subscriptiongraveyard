@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import "./settings.css";
 
 type ScanState =
   | { phase: "idle" }
@@ -8,9 +10,10 @@ type ScanState =
   | { phase: "done"; messagesSeen: number; receiptsFound: number; subscriptionsFound: number; apparitions: number }
   | { phase: "error"; message: string; reconsent?: boolean };
 
-export function ScanCard({ gmailConnected }: { gmailConnected: boolean }) {
+export function ScanCard({ gmailConnected, bare = false }: { gmailConnected: boolean; bare?: boolean }) {
   const [state, setState] = useState<ScanState>({ phase: "idle" });
   const sourceRef = useRef<EventSource | null>(null);
+  const router = useRouter();
 
   function start() {
     sourceRef.current?.close();
@@ -31,6 +34,7 @@ export function ScanCard({ gmailConnected }: { gmailConnected: boolean }) {
           apparitions: p.apparitions ?? 0,
         });
         es.close();
+        router.refresh(); /* pull fresh plots/stats into the page */
       } else if (typeof p.messagesSeen === "number") {
         setState({ phase: "running", messagesSeen: p.messagesSeen, receiptsFound: p.receiptsFound ?? 0 });
       }
@@ -47,14 +51,8 @@ export function ScanCard({ gmailConnected }: { gmailConnected: boolean }) {
     fontSize: "0.72rem",
   };
 
-  return (
-    <section className="st-card">
-      <h2>The séance</h2>
-      <p>
-        Scan your inbox for receipt emails. Only headers and preview snippets are read;
-        parsed fields are all we keep.
-      </p>
-
+  const body = (
+    <>
       {state.phase === "running" && (
         <p style={{ ...mono, color: "#8fe8ff" }} role="status">
           SCANNING INBOX… <span style={{ color: "#bfe9cd" }}>{state.messagesSeen.toLocaleString()}</span> MESSAGES ·{" "}
@@ -86,6 +84,19 @@ export function ScanCard({ gmailConnected }: { gmailConnected: boolean }) {
         {!gmailConnected && <span className="st-badge st-badge--off">CONNECT GMAIL FIRST</span>}
       </div>
       <p className="st-fine">RE-SCANS ARE INCREMENTAL — ALREADY-PARSED RECEIPTS ARE SKIPPED. A NIGHTLY SWEEP RUNS AUTOMATICALLY.</p>
+    </>
+  );
+
+  if (bare) return <div>{body}</div>;
+
+  return (
+    <section className="st-card">
+      <h2>The séance</h2>
+      <p>
+        Scan your inbox for receipt emails. Only headers and preview snippets are read;
+        parsed fields are all we keep.
+      </p>
+      {body}
     </section>
   );
 }
