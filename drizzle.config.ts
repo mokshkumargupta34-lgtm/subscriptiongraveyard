@@ -1,5 +1,8 @@
-import "dotenv/config";
+import { config } from "dotenv";
 import { defineConfig } from "drizzle-kit";
+
+config({ path: ".env.local" });
+config(); /* fallback: plain .env */
 
 /* Migrations use the DIRECT connection (port 5432) — the transaction
    pooler can't run DDL reliably. Falls back to DATABASE_URL if unset. */
