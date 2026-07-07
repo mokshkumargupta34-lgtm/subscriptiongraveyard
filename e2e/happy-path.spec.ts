@@ -21,7 +21,7 @@ test.describe("happy path: login → scan → plots → bury → export", () => 
 
     /* plots render the three mocked merchants */
     await page.goto("/dashboard");
-    await expect(page.getByRole("heading", { name: "Your whole graveyard, on one screen" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Your whole graveyard/ })).toBeVisible();
     await expect(page.getByRole("heading", { name: "StreamFlix" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "GymRat+" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "CloudVault" })).toBeVisible();
@@ -47,7 +47,7 @@ test.describe("happy path: login → scan → plots → bury → export", () => 
     await expect(page.locator(".db-stat", { hasText: "BURIED FOR GOOD" }).locator("b")).toHaveText("1");
 
     /* apparitions from the two one-off receipts */
-    await expect(page.getByText(/single sightings awaiting review/)).toBeVisible();
+    await expect(page.getByText(/Single Sightings Awaiting Review/i)).toBeVisible();
 
     /* CSV export */
     const csv = await context.request.get("/api/app/export");

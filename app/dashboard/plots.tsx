@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
+import { CalendarClock, ChartLine, Ghost, Rows3 } from "lucide-react";
 import type { DashboardSub } from "@/lib/subs";
 import {
   buryAction,
@@ -19,6 +20,12 @@ interface Apparition {
   chargedAt: string | null;
 }
 
+interface Extraction {
+  year: number;
+  months: number[];
+  totalCents: number;
+}
+
 const money = (cents: number, currency = "USD") => {
   const sym = { USD: "$", EUR: "€", GBP: "£", INR: "₹" }[currency] ?? "$";
   return sym + (cents / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -31,7 +38,15 @@ const dateShort = (iso: string | null) =>
   iso ? new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—";
 const CADENCE_LABEL: Record<string, string> = { monthly: "/MO", yearly: "/YR", weekly: "/WK", unknown: "" };
 
-export function Plots({ subs, apparitions }: { subs: DashboardSub[]; apparitions: Apparition[] }) {
+export function Plots({
+  subs,
+  apparitions,
+  extraction,
+}: {
+  subs: DashboardSub[];
+  apparitions: Apparition[];
+  extraction: Extraction;
+}) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [burstAt, setBurstAt] = useState<{ x: number; y: number } | null>(null);
   const [pending, startTransition] = useTransition();
@@ -49,55 +64,87 @@ export function Plots({ subs, apparitions }: { subs: DashboardSub[]; apparitions
 
   return (
     <>
-      <h2 className="db-h2">The plots</h2>
-      {subs.length === 0 ? (
-        <div className="db-empty">
-          <p style={{ fontFamily: '"Cinzel", serif', color: "#e9e7ff", fontSize: "1.2rem", marginBottom: "0.5rem" }}>
-            No spirits yet
+      <div className="db-duo">
+        <section className="db-card" id="plots" aria-label="Your plots">
+          <p className="db-card__head">
+            <Rows3 aria-hidden /> The Plots
           </p>
-          <p>Run your first séance above — connect Gmail in Settings if you haven&rsquo;t.</p>
-        </div>
-      ) : (
-        <div className="db-graves">
-          {subs.map((s) => (
-            <div
-              key={s.id}
-              className={`db-grave${s.status === "buried" ? " db-grave--buried" : ""}`}
-              role="button"
-              tabIndex={0}
-              aria-label={`${s.displayName} details`}
-              onClick={() => setOpenId(s.id)}
-              onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setOpenId(s.id)}
-            >
-              {s.status === "buried" && <span className="db-ribbon">AT REST</span>}
-              <p className="rip">R.I.P</p>
-              <h3>{s.displayName}</h3>
-              <p className="meta">
-                {s.firstSeenAt ? `SINCE ${new Date(s.firstSeenAt).getFullYear()}` : "SINCE ?"} ·{" "}
-                {moneyShort(s.amountCents, s.currency)}
-                {CADENCE_LABEL[s.cadence]}
-              </p>
-              <p className="damage">{moneyShort(s.lifetimeCents, s.currency)}</p>
-              <p className="damage-label">LIFETIME DAMAGE</p>
-              <p className="db-conf">CONFIDENCE {(s.confidence * 100).toFixed(0)}%</p>
+          {subs.length === 0 ? (
+            <div className="db-empty">
+              <div className="db-orb" aria-hidden>
+                <i />
+              </div>
+              <p className="db-empty__title">No spirits yet</p>
+              <p>Run your first séance above — connect Gmail in Settings if you haven&rsquo;t.</p>
             </div>
-          ))}
-        </div>
-      )}
+          ) : (
+            <div className="db-graves">
+              {subs.map((s) => (
+                <div
+                  key={s.id}
+                  className={`db-grave${s.status === "buried" ? " db-grave--buried" : ""}`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${s.displayName} details`}
+                  onClick={() => setOpenId(s.id)}
+                  onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setOpenId(s.id)}
+                >
+                  {s.status === "buried" && <span className="db-ribbon">AT REST</span>}
+                  <p className="rip">R.I.P</p>
+                  <h3>{s.displayName}</h3>
+                  <p className="meta">
+                    {s.firstSeenAt ? `SINCE ${new Date(s.firstSeenAt).getFullYear()}` : "SINCE ?"} ·{" "}
+                    {moneyShort(s.amountCents, s.currency)}
+                    {CADENCE_LABEL[s.cadence]}
+                  </p>
+                  <p className="damage">{moneyShort(s.lifetimeCents, s.currency)}</p>
+                  <p className="damage-label">LIFETIME DAMAGE</p>
+                  <p className="db-conf">CONFIDENCE {(s.confidence * 100).toFixed(0)}%</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
 
-      <RenewalCalendar subs={subs} pending={pending} />
-
-      {apparitions.length > 0 && (
-        <>
-          <h2 className="db-h2">Apparitions — single sightings awaiting review</h2>
-          <p style={{ color: "#a3a0d6", marginTop: "-0.4rem", marginBottom: "1rem", fontSize: "0.95rem" }}>
-            One-off receipts that don&rsquo;t recur (yet). They&rsquo;ll join a plot automatically if a second
-            charge ever appears. Dismiss the ones that are just purchases.
+        <section className="db-card" aria-label="Extraction overview">
+          <p className="db-card__head">
+            <ChartLine aria-hidden /> Extraction Overview
+            <span className="db-card__tag">This Year</span>
           </p>
+          <p className="db-chart__total">
+            <b>{money(extraction.totalCents)}</b>
+            <span>Total Extracted · {extraction.year}</span>
+          </p>
+          <ExtractionChart months={extraction.months} />
+        </section>
+      </div>
+
+      <section className="db-card" aria-label="Renewal calendar">
+        <p className="db-card__head">
+          <CalendarClock aria-hidden /> Renewal Calendar
+        </p>
+        <RenewalCalendar subs={subs} pending={pending} />
+      </section>
+
+      <section className="db-card db-appa-card" id="apparitions" aria-label="Apparitions">
+        <div className="db-appa-card__head">
+          <span className="db-ico db-ico--violet"><Ghost aria-hidden /></span>
+          <div>
+            <p className="db-card__title">Apparitions — Single Sightings Awaiting Review</p>
+            <p className="db-card__desc">
+              One-off receipts that don&rsquo;t recur (yet). They&rsquo;ll join a plot automatically if a second
+              charge ever appears. Dismiss the ones that are just purchases.
+            </p>
+          </div>
+        </div>
+        {apparitions.length === 0 ? (
+          <p className="db-card__desc" style={{ marginTop: "0.4rem" }}>Nothing sighted. The mist is quiet tonight.</p>
+        ) : (
           <div className="db-appa">
             {apparitions.map((a) => (
               <span key={a.id} className="db-appa-chip">
-                {a.merchantGuess} · <span className="money">{a.amountCents ? money(a.amountCents, a.currency) : "?"}</span> ·{" "}
+                <i className="dot" aria-hidden />
+                {a.merchantGuess} <span className="money">{a.amountCents ? money(a.amountCents, a.currency) : "?"}</span> ·{" "}
                 {dateShort(a.chargedAt)}
                 <button
                   type="button"
@@ -109,8 +156,8 @@ export function Plots({ subs, apparitions }: { subs: DashboardSub[]; apparitions
               </span>
             ))}
           </div>
-        </>
-      )}
+        )}
+      </section>
 
       {open && (
         <Drawer
@@ -302,13 +349,15 @@ function RenewalCalendar({ subs, pending }: { subs: DashboardSub[]; pending: boo
     return { cells, renewDays, upcoming };
   }, [subs, year, month, now]);
 
-  if (subs.length === 0) return null;
+  if (subs.length === 0) {
+    return <p className="db-card__desc">Plots first — renewals appear here after your first séance finds spirits.</p>;
+  }
 
   return (
     <>
-      <h2 className="db-h2">
-        Renewal calendar — {now.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-      </h2>
+      <p className="db-card__desc" style={{ marginBottom: "0.9rem" }}>
+        {now.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+      </p>
       <div className="db-cal" role="img" aria-label="Calendar of upcoming renewals this month">
         {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
           <span className="dow" key={i}>{d}</span>
@@ -351,6 +400,49 @@ function RenewalCalendar({ subs, pending }: { subs: DashboardSub[]; pending: boo
         ))}
       </div>
     </>
+  );
+}
+
+/* Single-series monthly line: violet stroke, dot markers, recessive
+   grid, mono axis labels; native <title> tooltips per point. */
+function ExtractionChart({ months }: { months: number[] }) {
+  const W = 520;
+  const H = 180;
+  const PAD = { l: 44, r: 12, t: 12, b: 26 };
+  const max = Math.max(100, ...months.map((c) => c / 100));
+  const nice = Math.ceil(max / 50) * 50;
+  const x = (i: number) => PAD.l + (i / 11) * (W - PAD.l - PAD.r);
+  const y = (v: number) => H - PAD.b - (v / nice) * (H - PAD.t - PAD.b);
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const pts = months.map((c, i) => `${x(i).toFixed(1)},${y(c / 100).toFixed(1)}`).join(" ");
+
+  return (
+    <svg
+      className="db-chart"
+      viewBox={`0 0 ${W} ${H}`}
+      role="img"
+      aria-label={`Monthly extraction: ${months.map((c, i) => `${MONTHS[i]} $${(c / 100).toFixed(0)}`).join(", ")}`}
+    >
+      {[0, nice / 2, nice].map((v) => (
+        <g key={v}>
+          <line x1={PAD.l} x2={W - PAD.r} y1={y(v)} y2={y(v)} className="grid" />
+          <text x={PAD.l - 8} y={y(v) + 3} textAnchor="end" className="axis">
+            ${v}
+          </text>
+        </g>
+      ))}
+      {MONTHS.map((m, i) => (
+        <text key={m} x={x(i)} y={H - 8} textAnchor="middle" className="axis">
+          {m}
+        </text>
+      ))}
+      <polyline points={pts} className="line" />
+      {months.map((c, i) => (
+        <circle key={i} cx={x(i)} cy={y(c / 100)} r="3.4" className="dotpt">
+          <title>{`${MONTHS[i]}: $${(c / 100).toFixed(2)}`}</title>
+        </circle>
+      ))}
+    </svg>
   );
 }
 

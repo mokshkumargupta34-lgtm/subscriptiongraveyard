@@ -152,6 +152,24 @@ export async function dismissApparition(userId: string, receiptId: string) {
     .where(and(eq(receipts.id, receiptId), eq(receipts.userId, userId)));
 }
 
+/* Extraction Overview: sum of parsed receipt amounts per month of the
+   current year (chart), plus the year total. */
+export async function getMonthlyExtraction(userId: string) {
+  const year = new Date().getFullYear();
+  const rows = await db
+    .select({ amountCents: receipts.amountCents, chargedAt: receipts.chargedAt })
+    .from(receipts)
+    .where(eq(receipts.userId, userId));
+
+  const months = Array.from({ length: 12 }, () => 0);
+  for (const r of rows) {
+    if (!r.chargedAt || !r.amountCents) continue;
+    if (r.chargedAt.getFullYear() !== year) continue;
+    months[r.chargedAt.getMonth()] += r.amountCents;
+  }
+  return { year, months, totalCents: months.reduce((a, b) => a + b, 0) };
+}
+
 const CADENCE_PER_YEAR: Record<string, number> = { monthly: 12, yearly: 1, weekly: 52, unknown: 0 };
 
 export function computeStats(subs: DashboardSub[]) {
