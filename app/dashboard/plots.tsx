@@ -72,7 +72,7 @@ export function Plots({
           {subs.length === 0 ? (
             <div className="db-empty">
               <div className="db-orb" aria-hidden>
-                <i />
+                <img src="/media/dash-orb.jpg" alt="" />
               </div>
               <p className="db-empty__title">No spirits yet</p>
               <p>Run your first séance above — connect Gmail in Settings if you haven&rsquo;t.</p>

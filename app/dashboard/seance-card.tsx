@@ -58,14 +58,7 @@ export function SeanceCard({ gmailConnected, hasSubs }: { gmailConnected: boolea
   return (
     <section className="db-seance" id="seance" aria-label="Run a scan">
       <div className="db-seance__art" aria-hidden="true">
-        <svg viewBox="0 0 120 90">
-          <circle cx="92" cy="20" r="12" fill="#e9e7ff" opacity="0.85" />
-          <circle cx="88" cy="17" r="12" fill="#131028" />
-          <path d="M28 78V42c0-13 8-22 20-22s20 9 20 22v36" fill="#2a2452" stroke="#4a3d8f" strokeWidth="2" />
-          <path d="M38 44h20M48 34v22" stroke="#8d86c9" strokeWidth="3" strokeLinecap="round" />
-          <ellipse cx="52" cy="80" rx="40" ry="6" fill="#1c1a4a" />
-          <path d="M8 80c8-4 20-4 28 0M76 80c8-4 20-4 28 0" stroke="#241f4d" strokeWidth="3" fill="none" />
-        </svg>
+        <img src="/media/dash-seance.jpg" alt="" />
       </div>
 
       <div className="db-seance__copy">

@@ -80,13 +80,7 @@ export default async function DashboardPage() {
 
         <div className="db-protip">
           <div className="db-protip__art" aria-hidden>
-            <svg viewBox="0 0 64 80">
-              <circle cx="44" cy="16" r="11" fill="#e9e7ff" opacity="0.75" />
-              <path d="M32 22c-10 0-17 8-17 19v26c0 2 3 4 4.5 2.5L23 66l3.5 3.5c1.5 1.5 4.5 1.5 6 0L36 66l3.5 3.5c1.5 1.5 4.5 1.5 6 0L49 66l3.5 3.5C54 71 57 69 57 67V41c0-11-7-19-17-19z" transform="translate(-8 0)" fill="#cfc9f2" opacity="0.9" />
-              <circle cx="18" cy="42" r="2.6" fill="#131028" />
-              <circle cx="30" cy="42" r="2.6" fill="#131028" />
-              <ellipse cx="24" cy="52" rx="3" ry="4.4" fill="#131028" opacity="0.7" />
-            </svg>
+            <img src="/media/dash-protip.jpg" alt="" />
           </div>
           <p className="db-protip__title">Pro Tip</p>
           <p className="db-protip__body">Run your first séance to summon your data.</p>

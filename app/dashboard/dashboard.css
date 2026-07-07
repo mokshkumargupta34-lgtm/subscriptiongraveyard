@@ -63,7 +63,12 @@
   text-align: center;
 }
 .db-protip__art { display: flex; justify-content: center; margin-bottom: 0.5rem; }
-.db-protip__art svg { width: 74px; height: 88px; filter: drop-shadow(0 0 16px rgba(207, 201, 242, 0.45)); }
+.db-protip__art img {
+  width: 132px; height: 158px; object-fit: cover; border-radius: 12px;
+  -webkit-mask-image: radial-gradient(115% 115% at 50% 45%, #000 62%, transparent 96%);
+  mask-image: radial-gradient(115% 115% at 50% 45%, #000 62%, transparent 96%);
+  filter: drop-shadow(0 0 18px rgba(155, 140, 255, 0.35));
+}
 .db-protip__title { font-family: var(--font-cinzel, "Cinzel"), serif; font-weight: 700; color: #e9e7ff; letter-spacing: 0.06em; }
 .db-protip__body { font-size: 0.85rem; color: #a3a0d6; margin: 0.35rem 0 0.85rem; }
 .db-protip__btn {
@@ -87,11 +92,11 @@
   overflow: hidden;
 }
 .db-hero__art {
-  position: absolute; inset: 0 0 0 32%;
-  background: url("/media/poster.jpg") right center / cover no-repeat;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 55%);
-  mask-image: linear-gradient(90deg, transparent, #000 55%);
-  opacity: 0.5;
+  position: absolute; inset: 0;
+  background: url("/media/dash-hero.jpg") right center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(90deg, transparent 4%, #000 42%);
+  mask-image: linear-gradient(90deg, transparent 4%, #000 42%);
+  opacity: 0.9;
   pointer-events: none;
 }
 .db-hero__actions {
@@ -187,12 +192,16 @@
   padding: 1.2rem 1.5rem;
 }
 .db-seance__art {
-  flex: none; width: 130px; height: 96px;
+  flex: none; width: 148px; height: 104px;
   border-radius: 12px; overflow: hidden;
-  background: radial-gradient(90% 70% at 70% 20%, rgba(122, 108, 240, 0.25), transparent), #0c0a20;
+  background: #0c0a20;
   display: grid; place-items: center;
 }
-.db-seance__art svg { width: 110px; height: 82px; }
+.db-seance__art img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+  -webkit-mask-image: radial-gradient(130% 130% at 50% 50%, #000 60%, transparent 98%);
+  mask-image: radial-gradient(130% 130% at 50% 50%, #000 60%, transparent 98%);
+}
 .db-seance__copy { min-width: 0; flex: 1; }
 .db-seance__copy h2 {
   font-family: var(--font-display, "Playfair Display"), Georgia, serif;
@@ -255,13 +264,11 @@
   font-weight: 600; font-size: 1.3rem; color: #f3f1ff; margin: 0.9rem 0 0.3rem;
 }
 .db-orb { display: flex; justify-content: center; }
-.db-orb i {
-  width: 86px; height: 86px; border-radius: 50%;
-  background:
-    radial-gradient(circle at 32% 28%, rgba(233, 231, 255, 0.85) 0 6%, transparent 18%),
-    radial-gradient(circle at 60% 65%, rgba(122, 108, 240, 0.75), rgba(28, 26, 74, 0.9) 70%),
-    #1c1a4a;
-  box-shadow: 0 0 34px rgba(122, 108, 240, 0.5), 0 14px 20px -8px rgba(0, 0, 0, 0.6);
+.db-orb img {
+  width: 128px; height: 128px; object-fit: cover;
+  -webkit-mask-image: radial-gradient(closest-side, #000 68%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 68%, transparent 100%);
+  filter: drop-shadow(0 0 26px rgba(122, 108, 240, 0.45));
 }
 
 /* chart */
