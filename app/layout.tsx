@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cinzel, Spectral } from "next/font/google";
+import { Cinzel, JetBrains_Mono, Playfair_Display, Spectral } from "next/font/google";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -16,6 +16,23 @@ const spectral = Spectral({
   display: "swap",
 });
 
+/* dashboard display serif — matches the high-contrast headline in the
+   design mock ("Your whole graveyard, on one screen.") */
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata = {
   title: "Subscription Graveyard",
   description:
@@ -24,7 +41,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cinzel.variable} ${spectral.variable}`}>
+    <html lang="en" className={`${cinzel.variable} ${spectral.variable} ${playfair.variable} ${jetbrains.variable}`}>
       <body style={{ margin: 0, background: "#07071c" }}>{children}</body>
     </html>
   );
