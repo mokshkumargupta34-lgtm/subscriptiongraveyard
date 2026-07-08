@@ -9,7 +9,12 @@
   color: #cfd0ef;
   font-family: var(--font-spectral, "Spectral"), Georgia, serif;
   font-weight: 300;
+  position: relative;
+  isolation: isolate; /* contain the ghost layer's stacking */
 }
+/* ghosts render at z-index 0 (behind); real content sits above */
+.db-side { z-index: 2; }
+.db-main-col { position: relative; z-index: 1; }
 .db-mono { font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; }
 
 /* ---------- sidebar ---------- */

@@ -15,6 +15,7 @@ import { getGoogleAccount, hasGmailScope } from "@/lib/account";
 import { computeStats, getApparitions, getDashboardData, getMonthlyExtraction } from "@/lib/subs";
 import { Plots } from "./plots";
 import { SeanceCard } from "./seance-card";
+import { GhostLayer } from "./ghosts/GhostLayer";
 import "./dashboard.css";
 
 export const metadata: Metadata = { title: "Your plots — Subscription Graveyard" };
@@ -55,6 +56,9 @@ export default async function DashboardPage() {
 
   return (
     <div className="db-shell" id="top">
+      {/* living graveyard — decorative, behind all content */}
+      <GhostLayer />
+
       {/* ---------- sidebar ---------- */}
       <aside className="db-side">
         <a className="db-side__brand" href="/">
