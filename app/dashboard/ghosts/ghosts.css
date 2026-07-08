@@ -3,10 +3,11 @@
 .gh-layer {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 30; /* in FRONT of cards; below the drawer/overlay (40/50) */
   overflow: hidden;
   pointer-events: none;
-  /* lights the UI above it a touch without washing text */
+  /* screen blend → ghosts read as translucent glows over the UI, never
+     solid shapes that hide text; pointer-events none keeps buttons live */
   mix-blend-mode: screen;
 }
 

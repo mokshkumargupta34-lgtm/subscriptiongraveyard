@@ -12,9 +12,10 @@
   position: relative;
   isolation: isolate; /* contain the ghost layer's stacking */
 }
-/* ghosts render at z-index 0 (behind); real content sits above */
+/* ghosts float in FRONT of cards (gh-layer z30). Content stays in normal
+   flow so the fixed drawer/overlay (z40/50) can still rise above them. */
 .db-side { z-index: 2; }
-.db-main-col { position: relative; z-index: 1; }
+.db-main-col { position: relative; }
 .db-mono { font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; }
 
 /* ---------- sidebar ---------- */
