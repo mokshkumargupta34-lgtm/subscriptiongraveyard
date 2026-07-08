@@ -16,6 +16,7 @@ import { computeStats, getApparitions, getDashboardData, getMonthlyExtraction } 
 import { Plots } from "./plots";
 import { SeanceCard } from "./seance-card";
 import { GhostLayer } from "./ghosts/GhostLayer";
+import { HeroTitle } from "./HeroTitle";
 import "./dashboard.css";
 
 export const metadata: Metadata = { title: "Your plots — Subscription Graveyard" };
@@ -109,10 +110,8 @@ export default async function DashboardPage() {
               <Ghost aria-hidden />
             </span>
           </div>
-          <p className="db-kicker">THE RECKONING · LIVE</p>
-          <h1 className="db-h1">
-            Your whole graveyard, on <em>one screen.</em>
-          </h1>
+          <p className="db-kicker">THE RECKONING · <span className="live">LIVE</span></p>
+          <HeroTitle />
           <p className="db-hero__sub">Track. Uncover. Reclaim.</p>
         </header>
 

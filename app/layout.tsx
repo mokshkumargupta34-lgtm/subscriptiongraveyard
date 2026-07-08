@@ -1,5 +1,21 @@
 import type { Metadata } from "next";
-import { Cinzel, JetBrains_Mono, Playfair_Display, Spectral } from "next/font/google";
+import { Cinzel, Cormorant_Garamond, Inter, JetBrains_Mono, Playfair_Display, Spectral } from "next/font/google";
+
+/* dashboard type system: luxury editorial serif + clean modern sans */
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ui",
+  display: "swap",
+});
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -41,7 +57,10 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cinzel.variable} ${spectral.variable} ${playfair.variable} ${jetbrains.variable}`}>
+    <html
+      lang="en"
+      className={`${cinzel.variable} ${spectral.variable} ${playfair.variable} ${jetbrains.variable} ${cormorant.variable} ${inter.variable}`}
+    >
       <body style={{ margin: 0, background: "#07071c" }}>{children}</body>
     </html>
   );

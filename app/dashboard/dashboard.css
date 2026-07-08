@@ -7,7 +7,7 @@
   min-height: 100vh;
   background: #0b0920;
   color: #cfd0ef;
-  font-family: var(--font-spectral, "Spectral"), Georgia, serif;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
   font-weight: 300;
   position: relative;
   isolation: isolate; /* contain the ghost layer's stacking */
@@ -16,7 +16,7 @@
    flow so the fixed drawer/overlay (z40/50) can still rise above them. */
 .db-side { z-index: 2; }
 .db-main-col { position: relative; }
-.db-mono { font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; }
+.db-mono { font-family: var(--font-ui, "Inter"), system-ui, sans-serif; }
 
 /* ---------- sidebar ---------- */
 .db-side {
@@ -35,7 +35,7 @@
   display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
   padding: 0.6rem 0 0.4rem;
   text-decoration: none;
-  font-family: var(--font-cinzel, "Cinzel"), serif;
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
   font-weight: 700; font-size: 0.92rem; letter-spacing: 0.16em;
   color: #e9e7ff; text-align: center; line-height: 1.5;
 }
@@ -75,11 +75,11 @@
   mask-image: radial-gradient(115% 115% at 50% 45%, #000 62%, transparent 96%);
   filter: drop-shadow(0 0 18px rgba(155, 140, 255, 0.35));
 }
-.db-protip__title { font-family: var(--font-cinzel, "Cinzel"), serif; font-weight: 700; color: #e9e7ff; letter-spacing: 0.06em; }
+.db-protip__title { font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif; font-weight: 700; color: #e9e7ff; letter-spacing: 0.06em; }
 .db-protip__body { font-size: 0.85rem; color: #a3a0d6; margin: 0.35rem 0 0.85rem; }
 .db-protip__btn {
   display: inline-flex; align-items: center; gap: 0.4rem;
-  font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
   font-size: 0.62rem; letter-spacing: 0.1em;
   color: #e9e7ff; text-decoration: none;
   background: rgba(122, 108, 240, 0.22);
@@ -134,13 +134,13 @@
 
 .db-kicker {
   position: relative;
-  font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
   font-size: 0.72rem; letter-spacing: 0.34em; color: #8fe8c0;
   margin: 0 0 0.6rem;
 }
 .db-h1 {
   position: relative;
-  font-family: var(--font-display, "Playfair Display"), Georgia, serif;
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
   font-weight: 600;
   font-size: clamp(1.9rem, 3.6vw, 2.9rem);
   line-height: 1.15;
@@ -167,12 +167,12 @@
 }
 .db-stat b {
   display: block;
-  font-family: var(--font-display, "Playfair Display"), Georgia, serif;
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
   font-weight: 600; font-size: 1.7rem; color: #f3f1ff; line-height: 1.1;
 }
 .db-stat .lbl {
   display: block;
-  font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
   font-size: 0.56rem; letter-spacing: 0.22em; color: #8f8cc9; margin-top: 0.25rem;
 }
 .db-stat .sub { display: block; font-size: 0.8rem; color: #77749f; margin-top: 0.2rem; }
@@ -210,7 +210,7 @@
 }
 .db-seance__copy { min-width: 0; flex: 1; }
 .db-seance__copy h2 {
-  font-family: var(--font-display, "Playfair Display"), Georgia, serif;
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
   font-weight: 600; font-size: 1.45rem; color: #f3f1ff; margin: 0 0 0.35rem;
 }
 .db-seance__desc { color: #8f8cc9; font-size: 0.95rem; margin: 0; }
@@ -221,7 +221,7 @@
 .db-seance__btn {
   flex: none;
   display: inline-flex; align-items: center; gap: 0.55rem;
-  font-family: var(--font-spectral, "Spectral"), Georgia, serif;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
   font-weight: 500; font-size: 1.02rem;
   color: #fff;
   background: linear-gradient(135deg, #8b7bff, #6a58e8);
@@ -248,25 +248,25 @@
 }
 .db-card__head {
   display: flex; align-items: center; gap: 0.6rem;
-  font-family: var(--font-display, "Playfair Display"), Georgia, serif;
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
   font-weight: 600; font-size: 1.15rem; color: #f3f1ff;
   margin: 0 0 1rem;
 }
 .db-card__head svg { width: 18px; height: 18px; color: #9b8cff; }
 .db-card__tag {
   margin-left: auto;
-  font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
   font-size: 0.62rem; letter-spacing: 0.08em; color: #a3a0d6;
   border: 1px solid rgba(141, 134, 201, 0.35);
   border-radius: 9px; padding: 0.35rem 0.7rem;
 }
-.db-card__title { font-family: var(--font-display, "Playfair Display"), Georgia, serif; font-weight: 600; font-size: 1.12rem; color: #f3f1ff; margin: 0; }
+.db-card__title { font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif; font-weight: 600; font-size: 1.12rem; color: #f3f1ff; margin: 0; }
 .db-card__desc { color: #8f8cc9; font-size: 0.9rem; margin: 0.25rem 0 0; }
 
 /* crystal-ball empty state */
 .db-empty { text-align: center; padding: 1.6rem 0.5rem 1rem; color: #8f8cc9; }
 .db-empty__title {
-  font-family: var(--font-display, "Playfair Display"), Georgia, serif;
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
   font-weight: 600; font-size: 1.3rem; color: #f3f1ff; margin: 0.9rem 0 0.3rem;
 }
 .db-orb { display: flex; justify-content: center; }
@@ -280,20 +280,20 @@
 /* chart */
 .db-chart { width: 100%; height: auto; }
 .db-chart .grid { stroke: rgba(141, 134, 201, 0.16); stroke-width: 1; }
-.db-chart .axis { fill: #77749f; font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 9px; }
+.db-chart .axis { fill: #77749f; font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 9px; }
 .db-chart .line { fill: none; stroke: #8b7bff; stroke-width: 2.2; stroke-linejoin: round; filter: drop-shadow(0 0 6px rgba(122, 108, 240, 0.6)); }
 .db-chart .dotpt { fill: #ab9dff; stroke: #0e0b24; stroke-width: 1.4; }
 .db-chart__total { margin: -0.3rem 0 0.6rem; }
 .db-chart__total b {
   display: block;
-  font-family: var(--font-display, "Playfair Display"), Georgia, serif;
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
   font-weight: 600; font-size: 1.7rem; color: #f3f1ff;
 }
 .db-chart__total span { font-size: 0.82rem; color: #77749f; }
 
 /* buttons shared with drawer/calendar */
 .db-btn {
-  font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
   font-size: 0.64rem; letter-spacing: 0.14em;
   border-radius: 999px; padding: 0.55rem 1.2rem;
   cursor: pointer; background: transparent; text-decoration: none; display: inline-block;
@@ -324,15 +324,15 @@
 .db-grave:hover, .db-grave:focus-visible { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(122, 108, 240, 0.3); }
 .db-grave:focus-visible { outline: 2px solid #f0c96e; outline-offset: 4px; }
 .db-grave--buried { opacity: 0.6; }
-.db-grave .rip { font-family: var(--font-cinzel, "Cinzel"), serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.5em; color: #8d86c9; margin: 0; }
-.db-grave h3 { font-family: var(--font-cinzel, "Cinzel"), serif; font-weight: 700; font-size: 1.02rem; letter-spacing: 0.04em; color: #e9e7ff; margin: 0.45rem 0 0.2rem; overflow-wrap: anywhere; }
-.db-grave .meta { font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 0.58rem; letter-spacing: 0.14em; color: #8d86c9; margin: 0; }
-.db-grave .damage { font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-weight: 700; font-size: 1.3rem; color: #bfe9cd; margin: 0.7rem 0 0.1rem; text-shadow: 0 0 24px rgba(191, 233, 205, 0.35); }
-.db-grave .damage-label { font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 0.5rem; letter-spacing: 0.22em; color: #8d86c9; margin: 0; }
-.db-conf { margin: 0.45rem 0 0; font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 0.52rem; letter-spacing: 0.16em; color: #9b8cff; }
+.db-grave .rip { font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.5em; color: #8d86c9; margin: 0; }
+.db-grave h3 { font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif; font-weight: 700; font-size: 1.02rem; letter-spacing: 0.04em; color: #e9e7ff; margin: 0.45rem 0 0.2rem; overflow-wrap: anywhere; }
+.db-grave .meta { font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 0.58rem; letter-spacing: 0.14em; color: #8d86c9; margin: 0; }
+.db-grave .damage { font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-weight: 700; font-size: 1.3rem; color: #bfe9cd; margin: 0.7rem 0 0.1rem; text-shadow: 0 0 24px rgba(191, 233, 205, 0.35); }
+.db-grave .damage-label { font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 0.5rem; letter-spacing: 0.22em; color: #8d86c9; margin: 0; }
+.db-conf { margin: 0.45rem 0 0; font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 0.52rem; letter-spacing: 0.16em; color: #9b8cff; }
 .db-ribbon {
   position: absolute; top: 12px; right: -6px;
-  font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
   font-size: 0.52rem; letter-spacing: 0.18em;
   background: #f0c96e; color: #07071c;
   padding: 0.22rem 0.6rem; border-radius: 4px 0 0 4px;
@@ -352,8 +352,8 @@
   animation: db-slide 0.28s ease;
 }
 @keyframes db-slide { from { transform: translateX(60px); opacity: 0; } to { transform: none; opacity: 1; } }
-.db-drawer h3 { font-family: var(--font-cinzel, "Cinzel"), serif; font-size: 1.35rem; letter-spacing: 0.05em; color: #e9e7ff; margin: 0.2rem 0 0.3rem; }
-.db-drawer .sub { font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.2em; color: #8d86c9; }
+.db-drawer h3 { font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif; font-size: 1.35rem; letter-spacing: 0.05em; color: #e9e7ff; margin: 0.2rem 0 0.3rem; }
+.db-drawer .sub { font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.2em; color: #8d86c9; }
 .db-close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(141, 134, 201, 0.4); background: transparent; color: #a3a0d6; cursor: pointer; }
 .db-close:hover { color: #e9e7ff; border-color: #7a6cf0; }
 .db-close:focus-visible { outline: 2px solid #f0c96e; outline-offset: 2px; }
@@ -361,7 +361,7 @@
 .db-rows { margin: 1.2rem 0; border-top: 1px solid rgba(122, 108, 240, 0.15); }
 .db-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(122, 108, 240, 0.12); font-size: 0.92rem; }
 .db-row span:first-child { color: #a3a0d6; }
-.db-row .money { color: #bfe9cd; font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; }
+.db-row .money { color: #bfe9cd; font-family: var(--font-ui, "Inter"), system-ui, sans-serif; }
 .db-receipts { max-height: 180px; overflow-y: auto; }
 
 .db-guide { background: rgba(7, 7, 28, 0.6); border: 1px solid rgba(240, 201, 110, 0.3); border-radius: 12px; padding: 1rem 1.2rem; margin: 1rem 0; }
@@ -388,18 +388,18 @@
 
 /* calendar */
 .db-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; max-width: 420px; }
-.db-cal .dow { font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 0.52rem; letter-spacing: 0.1em; color: #8d86c9; text-align: center; padding-bottom: 4px; }
+.db-cal .dow { font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 0.52rem; letter-spacing: 0.1em; color: #8d86c9; text-align: center; padding-bottom: 4px; }
 .db-cal .day {
   aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
   border-radius: 8px; border: 1px solid rgba(122, 108, 240, 0.12);
-  font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 0.62rem; color: #a3a0d6;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 0.62rem; color: #a3a0d6;
 }
 .db-cal .day.renew { border-color: rgba(240, 201, 110, 0.6); color: #f0c96e; box-shadow: 0 0 12px rgba(240, 201, 110, 0.18); }
 .db-cal .day.today { border-color: rgba(143, 232, 255, 0.5); }
 .db-cal .day i { width: 4px; height: 4px; border-radius: 50%; background: #f0c96e; margin-top: 2px; }
 .db-renew-list { margin-top: 1rem; }
 .db-renew-item { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(122, 108, 240, 0.12); font-size: 0.92rem; }
-.db-toggle { display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 0.6rem; letter-spacing: 0.14em; color: #a3a0d6; cursor: pointer; }
+.db-toggle { display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 0.6rem; letter-spacing: 0.14em; color: #a3a0d6; cursor: pointer; }
 
 /* apparitions card */
 .db-appa-card__head { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
@@ -409,7 +409,7 @@
   background: #0e0c24;
   border: 1px solid rgba(141, 134, 201, 0.3);
   border-radius: 999px; padding: 0.5rem 0.55rem 0.5rem 0.9rem;
-  font-family: var(--font-mono, ui-monospace), "JetBrains Mono", monospace; font-size: 0.7rem; color: #cfd0ef;
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-size: 0.7rem; color: #cfd0ef;
 }
 .db-appa-chip .dot {
   width: 9px; height: 9px; border-radius: 50%;
@@ -441,4 +441,147 @@
   .db-burst { display: none; }
   .db-grave, .db-grave:hover { transition: none; transform: none; }
   .db-seance__btn, .db-seance__btn:hover { transition: none; transform: none; }
+}
+
+/* ============================================================
+   PREMIUM TYPOGRAPHY SYSTEM  (luxury gothic editorial)
+   Cormorant Garamond (display) + Inter (UI). Overrides above.
+   ============================================================ */
+.db-shell {
+  --t-primary: #f6f3ff;
+  --t-secondary: #cfc8e8;
+  --t-muted: #8c87b2;
+  --t-disabled: #5b5878;
+  --t-body: #b8b5d4;
+  --t-gold: #e7c86d;
+  --t-grad: linear-gradient(115deg, #c8a2ff 0%, #a855f7 45%, #7c3aed 100%);
+  color: var(--t-primary);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" 1, "kern" 1, "calt" 1, "ss01" 1;
+  font-variant-ligatures: common-ligatures contextual;
+}
+
+/* ---- small labels: uppercase, tracked, quiet ---- */
+.db-kicker {
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
+  font-size: clamp(10px, 0.8vw, 11px); font-weight: 600;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--t-muted); opacity: 0.9;
+}
+.db-kicker .live { color: var(--t-gold); }
+.db-stat .lbl {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.24em;
+  color: var(--t-muted); opacity: 0.9; margin-top: 0.4rem;
+}
+
+/* ---- hero title ---- */
+.db-h1 {
+  position: relative;
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(2.1rem, 5vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--t-primary);
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+  max-width: none;
+  margin: 0.1rem 0 0;
+  white-space: nowrap; /* .db-h1__br is the only break — words never split */
+}
+.db-h1__br { display: block; width: 100%; height: 0; }
+.db-h1__ch, .db-h1__sp { display: inline-block; will-change: transform, opacity, filter; }
+.db-h1__ln { display: block; }
+.db-h1__ch--grad, .db-h1__ln--grad {
+  background: var(--t-grad);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+/* subtle light sheen every ~24s */
+.db-h1::after {
+  content: ""; position: absolute; inset: -0.2em -0.4em;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.07) 50%, transparent 58%);
+  transform: translateX(-130%);
+  animation: db-sheen 24s ease-in-out infinite;
+  pointer-events: none; mix-blend-mode: screen;
+}
+@keyframes db-sheen { 0%, 86% { transform: translateX(-130%); } 96%, 100% { transform: translateX(130%); } }
+
+.db-hero__sub {
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
+  font-size: 16px; font-weight: 400; line-height: 1.7;
+  color: var(--t-body); margin-top: 1rem;
+}
+
+/* ---- metric numbers: editorial serif, tabular, gentle pulse ---- */
+.db-stat b, .db-chart__total b {
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
+  font-weight: 600; color: var(--t-primary);
+  font-variant-numeric: tabular-nums; letter-spacing: 0;
+  text-shadow: 0 0 22px rgba(168, 85, 247, 0.18);
+}
+.db-stat b {
+  font-size: clamp(2rem, 2.7vw, 2.6rem); line-height: 1;
+  animation: db-numpulse 9s ease-in-out infinite;
+}
+.db-chart__total b {
+  font-size: clamp(2.1rem, 3vw, 2.7rem);
+  animation: db-numpulse 9s ease-in-out infinite;
+}
+@keyframes db-numpulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.012); } }
+
+/* ---- section / card titles: editorial, hover brighten + track ---- */
+.db-card__head, .db-seance__copy h2, .db-empty__title, .db-card__title {
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
+  color: var(--t-primary); letter-spacing: 0.005em;
+  transition: letter-spacing 0.45s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+.db-card__head { font-size: clamp(1.2rem, 1.6vw, 1.55rem); font-weight: 600; }
+.db-seance__copy h2 { font-size: clamp(1.45rem, 2.2vw, 2rem); font-weight: 600; }
+.db-empty__title { font-size: clamp(1.35rem, 2vw, 1.7rem); font-weight: 600; }
+.db-card:hover .db-card__head,
+.db-card:hover .db-card__title {
+  letter-spacing: 0.045em; color: #fff;
+  text-shadow: 0 0 26px rgba(168, 85, 247, 0.28);
+}
+
+/* ---- body copy ---- */
+.db-seance__desc, .db-card__desc {
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
+  font-size: 15px; font-weight: 400; line-height: 1.7; color: var(--t-body);
+}
+.db-stat .sub { font-size: 13px; color: var(--t-muted); }
+.db-stat .sub--green { color: #7fe2b0; }
+
+/* ---- buttons: never bold ---- */
+.db-seance__btn { font-family: var(--font-ui, "Inter"), system-ui, sans-serif; font-weight: 500; font-size: 1rem; letter-spacing: 0.02em; }
+.db-btn, .db-chip { letter-spacing: 0.02em; }
+
+/* ---- sidebar: luxury application ---- */
+.db-side__brand {
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
+  font-weight: 600; font-size: 1.02rem; letter-spacing: 0.14em; color: var(--t-primary);
+}
+.db-side__nav a {
+  font-family: var(--font-ui, "Inter"), system-ui, sans-serif;
+  font-size: 15px; font-weight: 500; letter-spacing: 0.005em;
+  color: var(--t-secondary); opacity: 0.7;
+}
+.db-side__nav a:hover { opacity: 1; color: #fff; }
+.db-side__nav a.active { opacity: 1; color: #fff; }
+.db-side__nav a svg { width: 18px; height: 18px; }
+.db-protip__title { font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif; font-weight: 600; color: var(--t-primary); letter-spacing: 0.02em; }
+.db-protip__body { font-family: var(--font-ui, "Inter"), system-ui, sans-serif; color: var(--t-muted); font-size: 13px; line-height: 1.6; }
+
+/* ---- financial figures align perfectly ---- */
+.db-grave .damage, .db-row .money, .money, .db-chart .axis, .db-cal .day { font-variant-numeric: tabular-nums; }
+
+/* card breathing room (8px rhythm) */
+.db-card { padding: 1.75rem 1.75rem 1.85rem; }
+.db-stat { padding: 1.25rem 1.35rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .db-h1::after, .db-stat b, .db-chart__total b { animation: none; }
 }
