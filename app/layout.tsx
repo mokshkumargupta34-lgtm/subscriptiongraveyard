@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cinzel, Cormorant_Garamond, Inter, JetBrains_Mono, Playfair_Display, Spectral } from "next/font/google";
+import "./globals.css";
 
 /* dashboard type system: luxury editorial serif + clean modern sans */
 const cormorant = Cormorant_Garamond({

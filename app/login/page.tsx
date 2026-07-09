@@ -4,6 +4,8 @@ import { auth } from "@/auth";
 import { signInWithGoogle } from "@/app/actions";
 import { AetherBackground } from "./aether";
 import { WaitlistForm } from "./waitlist-form";
+import { LoginDecor } from "./login-decor";
+import { BorderBeam } from "@/components/ui/border-beam";
 import "./login.css";
 
 export const metadata: Metadata = {
@@ -23,9 +25,12 @@ export default async function LoginPage() {
       <div className="lg-tint" aria-hidden="true" />
       <div className="lg-glow lg-glow--top" aria-hidden="true" />
       <div className="lg-glow lg-glow--corner" aria-hidden="true" />
+      <LoginDecor />
 
       <main className="lg-wrap">
         <div className="lg-card">
+          <BorderBeam size={240} duration={14} colorFrom="#f0c96e" colorTo="#7a6cf0" className="opacity-70" />
+          <BorderBeam size={240} duration={14} delay={7} colorFrom="#7a6cf0" colorTo="#37e17f" className="opacity-60" />
           <p className="lg-rip">R.I.P · FREE TRIALS</p>
           <h1 className="lg-title">Enter the graveyard</h1>
           <p className="lg-sub">Sign in to exhume your inbox. The dead are only observed.</p>

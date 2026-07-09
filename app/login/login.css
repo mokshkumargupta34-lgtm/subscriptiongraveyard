@@ -44,6 +44,35 @@
 
 .lg-wrap { position: relative; z-index: 2; width: 100%; max-width: 430px; }
 
+/* atmospheric side columns — fill the empty space beside the card */
+.lg-side {
+  position: absolute; top: 0; bottom: 0; z-index: 1;
+  width: clamp(190px, 22vw, 330px);
+  overflow: hidden; pointer-events: none; opacity: 0.55;
+  -webkit-mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+  mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+}
+.lg-side--left { left: 0; }
+.lg-side--right { right: 0; }
+.lg-stone {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  width: 154px; margin: 0 auto;
+  padding: 15px 12px 13px;
+  border-radius: 46px 46px 8px 8px;
+  background: linear-gradient(180deg, rgba(24, 22, 52, 0.62), rgba(12, 11, 30, 0.5));
+  border: 1px solid rgba(122, 108, 240, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.lg-stone__rip {
+  font-family: var(--font-cinzel, "Cinzel"), serif; font-weight: 700;
+  font-size: 0.48rem; letter-spacing: 0.42em; color: #8d86c9;
+}
+.lg-stone__txt {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.56rem; letter-spacing: 0.1em; color: #a9a4d8; text-align: center;
+}
+@media (max-width: 1080px) { .lg-side { display: none; } }
+
 /* tombstone-shaped glass card */
 .lg-card {
   position: relative;
@@ -145,5 +174,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .lg-aether { display: none; }
+  .lg-side { display: none; }
   .lg-google, .lg-google:hover { transition: none; transform: none; }
 }
