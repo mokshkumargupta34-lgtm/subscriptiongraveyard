@@ -1,0 +1,216 @@
+/* =====================================================================
+   THE GRAVEYARD — public interactive experience
+   Descent → Burial → Bleed. Chrome + atmosphere around the drop-in
+   components in /components/graveyard. Inherits the landing's gothic
+   type (Cinzel display + Spectral body); mono stays JetBrains.
+   ===================================================================== */
+.gy {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #0a0917;
+  color: #eae5d9;
+  font-family: var(--font-body, "Spectral", Georgia, serif);
+  /* map the components' generic tokens onto the site's real faces */
+  --font-display: var(--font-cinzel, "Cinzel", Georgia, serif);
+  --font-body: var(--font-spectral, "Spectral", Georgia, serif);
+}
+.gy ::selection { background: #37e17f; color: #0a0917; }
+
+/* content sits above the fixed atmosphere */
+.gy > section { position: relative; z-index: 1; }
+
+/* ---------- atmosphere ---------- */
+.gy-atmos {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.gy-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+.gy-fog {
+  position: absolute;
+  width: 70vw;
+  height: 70vw;
+  border-radius: 50%;
+  filter: blur(60px);
+  will-change: transform;
+}
+.gy-fog--1 {
+  top: 8%;
+  left: 2vw;
+  background: radial-gradient(closest-side, rgba(139, 92, 246, 0.14), transparent);
+  animation: gy-fog 26s ease-in-out infinite alternate;
+}
+.gy-fog--2 {
+  bottom: 12%;
+  right: 2vw;
+  background: radial-gradient(closest-side, rgba(168, 85, 247, 0.1), transparent);
+  animation: gy-fog 34s ease-in-out infinite alternate-reverse;
+}
+@keyframes gy-fog {
+  from { transform: translate3d(-6%, 0, 0) scale(1); }
+  to   { transform: translate3d(8%, -4%, 0) scale(1.12); }
+}
+
+/* lantern rides above content (below chrome); clipped so it never scrolls */
+.gy-lantern-wrap {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
+.gy-lantern {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(168, 85, 247, 0.1), transparent);
+}
+
+/* ---------- chrome ---------- */
+.gy-chrome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px clamp(16px, 4vw, 40px);
+  pointer-events: none;
+}
+.gy-chrome a { pointer-events: auto; text-decoration: none; }
+.gy-back {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: #b8b3c9;
+  transition: color 0.25s;
+}
+.gy-back:hover { color: #eae5d9; }
+.gy-chrome__cta {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: #eae5d9;
+  padding: 9px 18px;
+  border: 1px solid #4c2e8a;
+  border-radius: 3px;
+  background: rgba(139, 92, 246, 0.12);
+  transition: background 0.25s, color 0.25s;
+}
+.gy-chrome__cta:hover { background: #8b5cf6; color: #0a0917; }
+
+/* ---------- burial section ---------- */
+.gy-burial {
+  padding: 84px 0 110px;
+  /* translucent so fog + lantern read through this calmer act */
+  background: linear-gradient(rgba(22, 15, 34, 0.86), rgba(10, 9, 23, 0.92));
+}
+.gy-burial__head {
+  text-align: center;
+  margin-bottom: 44px;
+  padding: 0 24px;
+}
+.gy-burial__eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #a855f7;
+  margin-bottom: 12px;
+}
+.gy-burial__title {
+  font-family: var(--font-display, serif);
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 48px);
+  margin: 0;
+  color: #eae5d9;
+}
+.gy-burial__sub {
+  color: #8a8397;
+  margin: 10px 0 0;
+  font-size: 15px;
+}
+.gy-plots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- finale / CTA ---------- */
+.gy-finale {
+  text-align: center;
+  max-width: 640px;
+  margin: 72px auto 0;
+  padding: 0 24px;
+}
+.gy-finale__eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #a855f7;
+  margin-bottom: 14px;
+}
+.gy-finale__hush {
+  font-family: var(--font-display, serif);
+  font-size: clamp(26px, 4.5vw, 40px);
+  color: #37e17f;
+  text-shadow: 0 0 30px rgba(55, 225, 127, 0.35);
+}
+.gy-finale__title {
+  font-family: var(--font-display, serif);
+  font-weight: 700;
+  font-size: clamp(26px, 4.5vw, 42px);
+  margin: 0;
+  color: #eae5d9;
+}
+.gy-finale__note {
+  color: #a3a0c0;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 16px auto 0;
+  max-width: 30rem;
+}
+.gy-finale__cta {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 15px 34px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: #0a0917;
+  background: linear-gradient(115deg, #c8a2ff, #a855f7 55%, #8b5cf6);
+  box-shadow: 0 0 34px rgba(168, 85, 247, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gy-finale__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 48px rgba(168, 85, 247, 0.6);
+}
+.gy-finale__fine {
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #5a5470;
+  margin-top: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gy-fog { animation: none; }
+}
