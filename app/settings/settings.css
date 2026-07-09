@@ -6,15 +6,18 @@
   font-weight: 300;
 }
 .st-top {
+  position: relative; z-index: 1;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.4rem clamp(1.25rem, 5vw, 3rem);
   border-bottom: 1px solid rgba(122, 108, 240, 0.15);
+  background: rgba(7, 7, 28, 0.5);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
 }
 .st-top a {
   font-family: var(--font-cinzel, "Cinzel"), serif; font-weight: 700; font-size: 0.95rem;
   letter-spacing: 0.12em; color: #e9e7ff; text-decoration: none;
 }
-.st-main { max-width: 680px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3rem) 5rem; }
+.st-main { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3rem) 5rem; }
 .st-kicker {
   font-family: ui-monospace, Menlo, Consolas, monospace;
   font-size: 0.72rem; letter-spacing: 0.4em; color: #f0c96e; margin-bottom: 1rem;
@@ -25,6 +28,8 @@
   letter-spacing: 0.04em; margin: 0 0 2.2rem;
 }
 .st-card {
+  position: relative;
+  overflow: hidden;
   background: rgba(17, 17, 51, 0.75);
   border: 1px solid rgba(122, 108, 240, 0.25);
   border-radius: 16px;

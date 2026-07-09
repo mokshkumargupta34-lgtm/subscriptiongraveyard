@@ -5,6 +5,8 @@ import { connectGmail, deleteAccountAction, disconnectGmailAction, signOutAction
 import { getGoogleAccount, hasGmailScope } from "@/lib/account";
 import { ConfirmSubmit } from "./delete-button";
 import { ScanCard } from "./scan-card";
+import { SettingsDecor } from "./settings-decor";
+import { BorderBeam } from "@/components/ui/border-beam";
 import "./settings.css";
 
 export const metadata: Metadata = { title: "Settings — Subscription Graveyard" };
@@ -23,6 +25,7 @@ export default async function SettingsPage({
 
   return (
     <div className="st-body">
+      <SettingsDecor />
       <div className="st-top">
         <a href="/">SUBSCRIPTION GRAVEYARD</a>
         <form action={signOutAction}>
@@ -38,6 +41,7 @@ export default async function SettingsPage({
         {params.disconnected && <p className="st-flash" role="status">Gmail disconnected — our access is revoked at Google.</p>}
 
         <section className="st-card">
+          <BorderBeam size={180} duration={13} colorFrom="#7a6cf0" colorTo="#8fe8ff" className="opacity-60" />
           <h2>Gmail connection</h2>
           <p>
             Read-only <code>gmail.readonly</code> scope. We parse receipt emails into subscription
@@ -69,6 +73,7 @@ export default async function SettingsPage({
         <ScanCard gmailConnected={gmailConnected} />
 
         <section className="st-card">
+          <BorderBeam size={180} duration={13} delay={6} colorFrom="#f0c96e" colorTo="#7a6cf0" className="opacity-50" />
           <h2>Account</h2>
           <p>
             Signed in as {session.user.email}. Deleting your account revokes Google access and

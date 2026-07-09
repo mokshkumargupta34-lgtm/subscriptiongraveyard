@@ -186,6 +186,8 @@
   max-width: 30rem;
 }
 .gy-finale__cta {
+  position: relative;
+  overflow: hidden;
   display: inline-block;
   margin-top: 28px;
   padding: 15px 34px;

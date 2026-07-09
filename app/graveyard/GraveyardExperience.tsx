@@ -5,6 +5,8 @@ import DescentHero from "@/components/graveyard/DescentHero";
 import BleedCounter from "@/components/graveyard/BleedCounter";
 import Tombstone, { Plot } from "@/components/graveyard/Tombstone";
 import { BleedProvider, useBleed } from "@/components/graveyard/BleedContext";
+import { Particles } from "@/components/ui/particles";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 /**
  * The public, playable graveyard — the three signature moments composed
@@ -38,6 +40,7 @@ function Atmosphere({ lantern }: { lantern: { x: number; y: number } }) {
         </svg>
         <div className="gy-fog gy-fog--1" />
         <div className="gy-fog gy-fog--2" />
+        <Particles className="absolute inset-0" quantity={140} color="#9b8cff" ease={80} staticity={60} />
       </div>
       <div className="gy-lantern-wrap" aria-hidden="true">
         <div className="gy-lantern" style={{ left: lantern.x, top: lantern.y }} />
@@ -71,6 +74,7 @@ function Finale() {
         </>
       )}
       <a className="gy-finale__cta" href="/login">
+        <BorderBeam size={90} duration={6} colorFrom="#ffffff" colorTo="#37e17f" className="opacity-80" />
         <span>Exhume my inbox</span>
       </a>
       <p className="gy-finale__fine">READ-ONLY GMAIL SCOPE · REVOKE ANY TIME · NO EMAIL LEAVES YOUR ACCOUNT</p>

@@ -17,6 +17,7 @@ import { Plots } from "./plots";
 import { SeanceCard } from "./seance-card";
 import { GhostLayer } from "./ghosts/GhostLayer";
 import { HeroTitle } from "./HeroTitle";
+import { StatNumber } from "./stat-number";
 import "./dashboard.css";
 
 export const metadata: Metadata = { title: "Your plots — Subscription Graveyard" };
@@ -120,7 +121,7 @@ export default async function DashboardPage() {
             <div className="db-stat">
               <span className="db-ico db-ico--green"><Banknote aria-hidden /></span>
               <div>
-                <b>{usd(stats.totalExtractionCents)}</b>
+                <b><StatNumber value={Math.round(stats.totalExtractionCents / 100)} prefix="$" /></b>
                 <span className="lbl">TOTAL EXTRACTION</span>
                 <span className="sub sub--green">All-time extracted</span>
               </div>
@@ -128,7 +129,7 @@ export default async function DashboardPage() {
             <div className="db-stat">
               <span className="db-ico db-ico--violet"><Ghost aria-hidden /></span>
               <div>
-                <b>{stats.activeCount}</b>
+                <b><StatNumber value={stats.activeCount} /></b>
                 <span className="lbl">ACTIVE SPIRITS</span>
                 <span className="sub">Subscriptions live</span>
               </div>
@@ -136,7 +137,7 @@ export default async function DashboardPage() {
             <div className="db-stat">
               <span className="db-ico db-ico--blue"><Tombstone /></span>
               <div>
-                <b>{stats.buriedCount}</b>
+                <b><StatNumber value={stats.buriedCount} /></b>
                 <span className="lbl">BURIED FOR GOOD</span>
                 <span className="sub">Canceled &amp; forgotten</span>
               </div>
@@ -144,7 +145,7 @@ export default async function DashboardPage() {
             <div className="db-stat">
               <span className="db-ico db-ico--teal"><Gem aria-hidden /></span>
               <div>
-                <b>{usd(stats.recoveredPerYearCents)}</b>
+                <b><StatNumber value={Math.round(stats.recoveredPerYearCents / 100)} prefix="$" /></b>
                 <span className="lbl">RECOVERED PER YEAR</span>
                 <span className="sub sub--green">Money back in your pocket</span>
               </div>
