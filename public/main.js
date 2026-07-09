@@ -502,6 +502,7 @@
     const quotes = Array.from(document.querySelectorAll(".testi__quote"));
     const wrap = $("testi-wrap");
     const N = quotes.length;
+    if (!wrap || N === 0) return; /* section removed pre-launch — no-op */
     let idx = 0, timer = 0;
 
     function render() {

@@ -108,9 +108,9 @@ export function GraveyardExperience() {
           <BleedCounter lifetimeDamage={LIFETIME_DAMAGE} />
 
           <div className="gy-burial__head">
-            <div className="gy-burial__eyebrow">ACT V · THE BURIAL</div>
+            <div className="gy-burial__eyebrow">ACT V · THE BURIAL · SAMPLE DATA</div>
             <h2 className="gy-burial__title">Lay them to rest. One click each.</h2>
-            <p className="gy-burial__sub">Watch the bleed slow with every burial.</p>
+            <p className="gy-burial__sub">These are sample subscriptions. Watch the bleed slow with every burial.</p>
           </div>
 
           <div className="gy-plots">
